@@ -11,8 +11,8 @@
 
 #include "TestBotController.h"
 #include "GetHwndByPID.h"
-#include "botThread.h"
-
+#include "BotThread.h"
+#include "TestLuaController.h"
 
 #define MAX_LOADSTRING 100
 
@@ -65,19 +65,32 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 
     }
 
-    LPTHREAD_START_ROUTINE botThread2 = (LPTHREAD_START_ROUTINE)testBotController;
-    HANDLE hThread2 = CreateThread(NULL, 0, botThread2, NULL, CREATE_SUSPENDED, NULL);
+    //=========测试msgController的线程==========
+    //LPTHREAD_START_ROUTINE botThread2 = (LPTHREAD_START_ROUTINE)testBotController;
+    //HANDLE hThread2 = CreateThread(NULL, 0, botThread2, NULL, CREATE_SUSPENDED, NULL);
+    //if (hThread2 == NULL)
+    //{
+
+    //}
+
+    // Set the thread to run in the background
+    //SetThreadPriority(hThread2, THREAD_PRIORITY_BELOW_NORMAL);
+
+    // Start the thread
+   //ResumeThread(hThread2);
+
+    //========测试luaController的线程========
+    LPTHREAD_START_ROUTINE luaTestThread = (LPTHREAD_START_ROUTINE)testLuaController;
+    HANDLE hThread2 = CreateThread(NULL, 0, luaTestThread, NULL, CREATE_SUSPENDED, NULL);
     if (hThread2 == NULL)
     {
 
     }
 
-    // Set the thread to run in the background
     SetThreadPriority(hThread2, THREAD_PRIORITY_BELOW_NORMAL);
 
-    // Start the thread
-    ResumeThread(hThread2);
 
+    ResumeThread(hThread2);
 
 
     //====

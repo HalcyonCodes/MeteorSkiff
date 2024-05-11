@@ -30,7 +30,10 @@
     <ClInclude Include="TestBotController.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="botThread.h">
+    <ClInclude Include="BotThread.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="TestLuaController.h">
       <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>
@@ -41,7 +44,7 @@
     <ClCompile Include="TestBotController.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
-    <ClCompile Include="botThread.cpp">
+    <ClCompile Include="BotThread.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
     <ClCompile Include="TestLuaController.cpp">

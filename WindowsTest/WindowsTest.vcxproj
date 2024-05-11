@@ -108,7 +108,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>..\\Skill\;..\\Action\;..\\Connect\;..\\LuaController\;..\\BotController\;..\\Order\;..\\Tool\;</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\\Skill\;..\\Action\;..\\Connect\;..\\LuaController\;..\\BotController\;..\\Order\;..\\Tool\;..\\LuaResource\;</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -134,15 +134,16 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="botThread.h" />
+    <ClInclude Include="BotThread.h" />
     <ClInclude Include="framework.h" />
     <ClInclude Include="Resource.h" />
     <ClInclude Include="targetver.h" />
     <ClInclude Include="TestBotController.h" />
+    <ClInclude Include="TestLuaController.h" />
     <ClInclude Include="WindowsTest.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="botThread.cpp" />
+    <ClCompile Include="BotThread.cpp" />
     <ClCompile Include="TestBotController.cpp" />
     <ClCompile Include="TestLuaController.cpp" />
     <ClCompile Include="WindowsTest.cpp" />

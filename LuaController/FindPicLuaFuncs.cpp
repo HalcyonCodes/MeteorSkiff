@@ -8,6 +8,14 @@ extern "C" {
 #include "lauxlib.h"
 #include "lualib.h"
 }
+#include "DbgPrint.h"
+
+//TES001 TEST
+int luaLTest(lua_State* L) {
+    dbgPrint("LuaLTest");
+    return 1;
+}
+
 
 //LGS001 findWindow
 int luaLFindWindow(lua_State* L) {
@@ -131,9 +139,14 @@ int luaLFindPAPicN(lua_State* L) {
     lua_newtable(L);
 
     int length = 0;
-    while (result[length] != nullptr) {
+    while (true) {
+        int q = result[length][0];
         length++;
-    }
+        if (q == -1) {
+            break;
+        }
+    };
+
 
     for (int i = 0; i < length; ++i) {
         lua_pushinteger(L, i + 1);
@@ -167,9 +180,13 @@ int luaLFindDAPicN(lua_State* L) {
     lua_newtable(L);
 
     int length = 0;
-    while (result[length] != nullptr) {
+    while (true) {
+        int q = result[length][0];
         length++;
-    }
+        if (q == -1) {
+            break;
+        }
+    };
 
     for (int i = 0; i < length; ++i) {
         lua_pushinteger(L, i + 1);
@@ -203,9 +220,13 @@ int luaLFindSAPicN(lua_State* L) {
     lua_newtable(L);
 
     int length = 0;
-    while (result[length] != nullptr) {
+    while (true) {
+        int q = result[length][0];
         length++;
-    }
+        if (q == -1) {
+            break;
+        }
+    };
 
     for (int i = 0; i < length; ++i) {
         lua_pushinteger(L, i + 1);
@@ -258,9 +279,13 @@ int luaLFindLNPicN(lua_State* L) {
     lua_newtable(L);
 
     int length = 0;
-    while (result[length] != nullptr) {
+    while (true) {
+        int q = result[length][0];
         length++;
-    }
+        if (q == -1) {
+            break;
+        }
+    };
 
     for (int i = 0; i < length; ++i) {
         lua_pushinteger(L, i + 1);

@@ -44,7 +44,7 @@
     <UseDebugLibraries>true</UseDebugLibraries>
     <PlatformToolset>v143</PlatformToolset>
     <CharacterSet>MultiByte</CharacterSet>
-    <CLRSupport>true</CLRSupport>
+    <CLRSupport>false</CLRSupport>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
     <ConfigurationType>StaticLibrary</ConfigurationType>
@@ -116,7 +116,7 @@
       <ConformanceMode>true</ConformanceMode>
       <PrecompiledHeader>Use</PrecompiledHeader>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
-      <AdditionalIncludeDirectories>..\\LuaResource\;..\\Skill\;..\\BotController\;</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\\LuaResource\;..\\Skill\;..\\BotController\;..\\Tool\;</AdditionalIncludeDirectories>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
     </ClCompile>
     <Link>
@@ -147,7 +147,6 @@
   <ItemGroup>
     <ClInclude Include="FindPicLuaFuncs.h" />
     <ClInclude Include="framework.h" />
-    <ClInclude Include="LuaAddFuncs.h" />
     <ClInclude Include="LuaExecutor.h" />
     <ClInclude Include="pch.h" />
   </ItemGroup>

@@ -1,4 +1,4 @@
-
+ 
 
 #include "pch.h"
 #include "Windows.h"
@@ -10,13 +10,16 @@ extern "C" {
 
 }
 
+
 #include "LuaExecutor.h"
 #include <string>
+#include "DbgPrint.h"
 
 //调用过程：luaInit -> luaAddAllFunc -> luaRegistFuncs -> luaLoadScripts(加载外部lua的buff) -> luaExecuteBuff
 
 void LuaExecutor::luaInit() {
-	this->L = luaL_newstate();
+	//this->L = luaL_newstate();
+	luaL_openlibs(this->L);
 	return;
 }
 
@@ -37,9 +40,11 @@ void LuaExecutor::luaAddAFunc(const char* name, lua_CFunction func) {
 	return;
 }
 
-void LuaExecutor::luaLoadScripts(char*& actionManagerBuff) {
+void LuaExecutor::luaLoadScripts(char* actionManagerBuff) {
 	this->scriptBuff = actionManagerBuff;
-	luaL_loadbufferx(this->L, this->scriptBuff, strlen(this->scriptBuff), "ActionBot", NULL);
+	//dbgPrint("Buff:%s", this->scriptBuff);
+	int i = luaL_loadbufferx(this->L, this->scriptBuff, strlen(this->scriptBuff), "ActionBot", NULL);
+	//int q = lua_pcall(L, 0, LUA_MULTRET, 0);
 	return;
 }
 
@@ -48,5 +53,6 @@ void LuaExecutor::luaExecuteBuff() {
 	//LuaPCall luaPCall = (LuaPCall)(staticNewModule + (QWORD)lua_pcallk - staticHModule);
 	LuaPCall luaPCall = (LuaPCall)lua_pcallk;
 	int i = (*luaPCall)(this->L, 0, 0, 0, 0, NULL);
+	//int i = lua_pcallk(this->L, 0, 0, 0, 0, NULL);
 	return;
 }

@@ -37,7 +37,7 @@ DWORD WINAPI testBotThread(LPVOID lpParam)
 		CW_USEDEFAULT, CW_USEDEFAULT, CW_USEDEFAULT, CW_USEDEFAULT,
 		NULL, NULL, hInstance, NULL);
 
-
+	//
 	hookBotThread(hwnd);
 
 	MSG msg;

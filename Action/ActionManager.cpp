@@ -43,7 +43,7 @@ int ActionManager::loadAllScript() {
             fileNames.push_back(fileName);
 
             std::string fullPath = path + "\\" + findFileData.cFileName;
-            dbgPrint("路径：%s", fullPath.c_str());
+            //dbgPrint("路径：%s", fullPath.c_str());
 
             std::string content;
             std::ifstream file(fullPath);
@@ -51,22 +51,25 @@ int ActionManager::loadAllScript() {
                 dbgPrint("错误：无法打开文件：%s", fullPath.c_str());
                 continue;
             }
-
+   
             std::string line;
             while (std::getline(file, line)) {
-                dbgPrint("行：%s", line.c_str());
+                line = line + "\0";
+                //dbgPrint("行：%s", line.c_str());
                 content += line;
                 content += '\n';
             }
+            
+            content = content + "\0";
 
             file.close();
-            dbgPrint("内容大小：%d", content.size());
+            //8dbgPrint("内容大小：%d", content.length());
 
-            char* bufTemp = new char[content.size() + 1];
-            // 根据需要使用bufTemp
-            memcpy(bufTemp, content.c_str(), content.size());
-            bufTemp[content.size()] = '\0';
+            char* bufTemp = new char[content.length() + 2];
+            strcpy_s(bufTemp, content.length() + 1, content.c_str());
+            bufTemp[content.length() + 2] = '\0';
             this->scripts[fileName] = bufTemp;
+            //dbgPrint("aaasr:%s", this->scripts[fileName]);
             count++;
         }
     } while (FindNextFileA(hFind, &findFileData) != 0);
@@ -77,6 +80,7 @@ int ActionManager::loadAllScript() {
 }
 
 char* ActionManager::getScript(const char* json) {
+
     //获取"script"字段下的脚本名称
     Document doc;
     doc.Parse(json);
@@ -84,8 +88,8 @@ char* ActionManager::getScript(const char* json) {
         dbgPrint("Para Parse Error");
         this->script = nullptr;
     }
-
-    return scripts[doc["script"].GetString()];
+    char* result = scripts[doc["script"].GetString()];
+    return result;
 }
 
 char* ActionManager::getScriptPara(const char* json) {

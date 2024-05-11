@@ -27,9 +27,6 @@
     <ClInclude Include="FindPicLuaFuncs.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="LuaAddFuncs.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="LuaController.cpp">
