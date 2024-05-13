@@ -1,0 +1,1 @@
+copy near the exe.

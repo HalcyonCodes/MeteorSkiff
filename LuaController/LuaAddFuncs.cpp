@@ -9,38 +9,41 @@ void LuaExecutor::luaAddAllFunc() {
     //====TestÄ£¿é====
     LuaExecutor::luaAddAFunc("luaLTest", luaLTest);
 
+    //====DbgPrintÄ£¿é====
+    LuaExecutor::luaAddAFunc("dbgPrint", luaLDbgPrint);
+
     //====FindPicÄ£¿é====
     // LBM001
-    LuaExecutor::luaAddAFunc("luaLLoadBmp", luaLLoadBmp);
+    LuaExecutor::luaAddAFunc("loadBmp", luaLLoadBmp);
 
     // LBM002
-    LuaExecutor::luaAddAFunc("luaLLoadBmpSub", luaLLoadBmpSub);
+    LuaExecutor::luaAddAFunc("loadBmpSub", luaLLoadBmpSub);
 
     // LBM003
-    LuaExecutor::luaAddAFunc("luaLLoadBmpList", luaLLoadBmpList);
+    LuaExecutor::luaAddAFunc("loadBmpList", luaLLoadBmpList);
 
     // LBM005
-    LuaExecutor::luaAddAFunc("luaLFindPAPicA", luaLFindPAPicA);
+    LuaExecutor::luaAddAFunc("findPAPicA", luaLFindPAPicA);
 
     // LBM006
-    LuaExecutor::luaAddAFunc("luaLFindDAPicA", luaLFindDAPicA);
+    LuaExecutor::luaAddAFunc("findDAPicA", luaLFindDAPicA);
 
     // LBM007
-    LuaExecutor::luaAddAFunc("luaLFindSAPicA", luaLFindSAPicA);
+    LuaExecutor::luaAddAFunc("findSAPicA", luaLFindSAPicA);
 
     // LBM008
-    LuaExecutor::luaAddAFunc("luaLFindPAPicN", luaLFindPAPicN);
+    LuaExecutor::luaAddAFunc("findPAPicN", luaLFindPAPicN);
 
     // LBM009
-    LuaExecutor::luaAddAFunc("luaLFindDAPicN", luaLFindDAPicN);
+    LuaExecutor::luaAddAFunc("findDAPicN", luaLFindDAPicN);
 
     // LBM010
-    LuaExecutor::luaAddAFunc("luaLFindSAPicN", luaLFindSAPicN);
+    LuaExecutor::luaAddAFunc("findSAPicN", luaLFindSAPicN);
 
     // LBM011
-    LuaExecutor::luaAddAFunc("luaLFindLNPicA", luaLFindLNPicA);
+    LuaExecutor::luaAddAFunc("findLNPicA", luaLFindLNPicA);
 
     // LBM012
-    LuaExecutor::luaAddAFunc("luaLFindLNPicN", luaLFindLNPicN);
+    LuaExecutor::luaAddAFunc("findLNPicN", luaLFindLNPicN);
 
 }
