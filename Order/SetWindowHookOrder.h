@@ -5,6 +5,7 @@
 
 extern HHOOK qHGame;
 
+extern HWND orderManagerHwnd;
 
-DWORD hookOrderThread();
+DWORD hookOrderThread(HWND hwnd);
 DWORD unHookOrderThread();

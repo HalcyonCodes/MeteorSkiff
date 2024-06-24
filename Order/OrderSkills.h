@@ -18,11 +18,19 @@
 
 
 //----Order´¦Àíº¯Êý----
+#define or000 5555509
 #define or001 5555510
 #define or002 5555511
+#define or003 5555512
+#define or004 5555513
+#define or005 5555514
+#define or006 5555515
+#define or007 5555516
+#define or008 5555517
 
 
 
 
 
 extern LRESULT CALLBACK orderProc(int code, WPARAM wParam, LPARAM lParam);
+

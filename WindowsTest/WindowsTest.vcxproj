@@ -140,12 +140,14 @@
     <ClInclude Include="targetver.h" />
     <ClInclude Include="TestBotController.h" />
     <ClInclude Include="TestLuaController.h" />
+    <ClInclude Include="TestOrderManager.h" />
     <ClInclude Include="WindowsTest.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="BotThread.cpp" />
     <ClCompile Include="TestBotController.cpp" />
     <ClCompile Include="TestLuaController.cpp" />
+    <ClCompile Include="TestOrderManager.cpp" />
     <ClCompile Include="WindowsTest.cpp" />
   </ItemGroup>
   <ItemGroup>

@@ -20,13 +20,15 @@
 
 HHOOK qHGame;
 
-DWORD hookOrderThread() {
+HWND orderManagerHwnd;
+
+DWORD hookOrderThread(HWND hwnd) {
 
 	if (qHGame != 0) {
 		dbgPrint("已经有钩子");
 		return 0;
 	}
-
+	orderManagerHwnd = hwnd;
 
 	// 获取当前线程ID
 	DWORD dThreadId = GetCurrentThreadId();

@@ -1,6 +1,8 @@
 #include "pch.h"
 #include "Windows.h"
+
 #include "ActionManager.h"
+
 #include <vector>
 #include "dbgPrint.h"
 
@@ -10,11 +12,14 @@
 
 #include "rapidjson/document.h"
 #include "rapidjson/error/en.h"
+
 #include <list>
 
 using namespace rapidjson;
 
 int ActionManager::loadAllScript() {
+
+
     char dirPathName[MAX_PATH] = {};
     GetModuleFileNameA(GetModuleHandle(NULL), dirPathName, MAX_PATH);
     std::string path = dirPathName;
@@ -89,41 +94,50 @@ char* ActionManager::getScript(const char* json) {
         this->script = nullptr;
     }
     char* result = scripts[doc["script"].GetString()];
+
     return result;
 }
 
 char* ActionManager::getScriptPara(const char* json) {
     Document doc;
+
     doc.Parse(json);
     if (doc.HasParseError()) {
         dbgPrint("Para Parse Error");
         return nullptr;
     }
-
     std::list<const char*> keyList;
-
     std::string luaCommond = "para = {} \n";
     
-
     //lua脚本参数格式： para["参数名称"] = 参数数值
-    if (doc.IsObject()) {
-        // 遍历所有成员
-        for (Value::ConstMemberIterator itr = doc["orderParas"] .MemberBegin(); itr != doc["orderParas"].MemberEnd(); ++itr) {
-            std::string nextRow = "";
-            nextRow = "para[" + std::string(itr->name.GetString()) + "]" + " = " + itr->value.GetString();
-            luaCommond = luaCommond + nextRow;
-            luaCommond = luaCommond + "\n";
+  if (doc.IsObject()) {
+    // 检查 "orderParas" 是否存在并且是一个数组
+    if (doc.HasMember("orderParas") && doc["orderParas"].IsArray()) {
+        const auto& orderParas = doc["orderParas"].GetArray();
+        //dbgPrint("Order Paras Array Size: %zu\n", orderParas.Size());
+        // 遍历 "orderParas" 数组
+        for (const auto& para : orderParas) {
+            if (para.IsObject()) {
+                for (const auto& kv : para.GetObject()) {
+                    std::string nextRow = "para[" + std::string(kv.name.GetString()) + "] = " + kv.value.GetString();
+                    luaCommond += nextRow;
+                    luaCommond += "\n";
+                }
+            }
         }
     }
-
+}
     size_t len = luaCommond.length();
     char* charPtr = new char[len + 1];
+
     strcpy_s(charPtr, len + 1, luaCommond.c_str());
+    charPtr[len] = '\0';
     return charPtr;
 
 }
 
 void ActionManager::buildScript(const char* json) {
+
     if (this->script != nullptr) {
         delete[] this->script;
         this->script = nullptr;
@@ -131,14 +145,15 @@ void ActionManager::buildScript(const char* json) {
 
     char* scriptPara = this->getScriptPara(json);
     char* sourceScript = this->getScript(json);
-    char* buildScript = new char[strlen(scriptPara) + strlen(sourceScript) + 3];
-    strcat_s(buildScript, strlen(scriptPara) + 1, scriptPara);
-    strcat_s(buildScript, strlen(sourceScript) + 1, sourceScript);
-
+    char* resultScript = new char[strlen(scriptPara) + strlen(sourceScript) + 1];
+    memset(resultScript, 0x00, sizeof(*resultScript));
+    strcat_s(resultScript, strlen(scriptPara) + strlen(sourceScript) + 1, scriptPara);
+    strcat_s(resultScript, strlen(scriptPara) + strlen(sourceScript) + 1, sourceScript);
     delete[] scriptPara;
-    delete[] sourceScript;
-    this->script = buildScript;
+    //delete[] sourceScript;
+    this->script = resultScript;
     return;
+  
 }
 
 

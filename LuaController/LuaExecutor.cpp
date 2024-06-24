@@ -41,10 +41,14 @@ void LuaExecutor::luaAddAFunc(const char* name, lua_CFunction func) {
 }
 
 void LuaExecutor::luaLoadScripts(char* actionManagerBuff) {
-	this->scriptBuff = actionManagerBuff;
+	//this->scriptBuff = actionManagerBuff;
 	//dbgPrint("Buff:%s", this->scriptBuff);
-	int i = luaL_loadbufferx(this->L, this->scriptBuff, strlen(this->scriptBuff), "ActionBot", NULL);
+	int i = luaL_loadbuffer(this->L, actionManagerBuff, strlen(actionManagerBuff), "ActionBot", NULL);
 	//int q = lua_pcall(L, 0, LUA_MULTRET, 0);
+	//if (this->scriptBuff != nullptr) {
+	//	delete[] this->scriptBuff;
+	//	this->scriptBuff = nullptr;
+	//}
 	return;
 }
 
@@ -55,4 +59,8 @@ void LuaExecutor::luaExecuteBuff() {
 	int i = (*luaPCall)(this->L, 0, 0, 0, 0, NULL);
 	//int i = lua_pcallk(this->L, 0, 0, 0, 0, NULL);
 	return;
+}
+
+void LuaExecutor::luaExit() {
+	lua_close(L);
 }

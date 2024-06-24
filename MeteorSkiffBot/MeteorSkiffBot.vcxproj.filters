@@ -18,56 +18,49 @@
     <ClInclude Include="framework.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="targetver.h">
+    <ClInclude Include="pch.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="Resource.h">
+    <ClInclude Include="MeteorSkiffBotWorkThread.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="WindowsTest.h">
+    <ClInclude Include="OrderManagerBot.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="TestBotController.h">
+    <ClInclude Include="OrderManagerBotWorkThread.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="BotThread.h">
+    <ClInclude Include="MeteorSkiffBot.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="TestLuaController.h">
+    <ClInclude Include="OrderManagerBotCtrlThread.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="TestOrderManager.h">
+    <ClInclude Include="MeteorSkiffBotCtrlThread.h">
       <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="WindowsTest.cpp">
+    <ClCompile Include="pch.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
-    <ClCompile Include="TestBotController.cpp">
+    <ClCompile Include="MeteorSkiffBotWorkThread.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
-    <ClCompile Include="BotThread.cpp">
+    <ClCompile Include="OrderManagerBot.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
-    <ClCompile Include="TestLuaController.cpp">
+    <ClCompile Include="OrderManagerBotWorkThread.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
-    <ClCompile Include="TestOrderManager.cpp">
+    <ClCompile Include="MeteorSkiffBot.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
-  </ItemGroup>
-  <ItemGroup>
-    <ResourceCompile Include="WindowsTest.rc">
-      <Filter>资源文件</Filter>
-    </ResourceCompile>
-  </ItemGroup>
-  <ItemGroup>
-    <Image Include="small.ico">
-      <Filter>资源文件</Filter>
-    </Image>
-    <Image Include="WindowsTest.ico">
-      <Filter>资源文件</Filter>
-    </Image>
+    <ClCompile Include="OrderManagerBotCtrlThread.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="MeteorSkiffBotCtrlThread.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

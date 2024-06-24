@@ -2,10 +2,17 @@
 
 #include <list>
 #include <string>
+#include "OrderManager.h"
+
 using namespace std;
 
-typedef struct OrderManager {
 
+
+typedef struct OrderManager {
+	
+	//--
+	const char* testChar = "testChar";
+	//--
 	list<const char*> orders; //所有订单
 	char* serverIp; //服务器ip地址
 	char* port; //服务器端口
@@ -23,9 +30,12 @@ typedef struct OrderManager {
 
 }_OrderManager;
 
+extern OrderManager* orderManager;
+
 
 
 /* json 格式：
+{
   "orders":[
     {
         "stackIndex": 0,
@@ -37,6 +47,7 @@ typedef struct OrderManager {
         "status":"wait"
     }
 ]
+}
 
 */
 

@@ -3,9 +3,7 @@
 #include <string>
 #include <list>
 
-
 using namespace std;
-
 
 //这里用来管理脚本，并且加载脚本代码字符到内存
 
@@ -25,3 +23,7 @@ typedef struct ActionManager {
 	void buildScript(const char* json); //通过json构造lua脚本
 
 }_ActionManager;
+
+
+
+

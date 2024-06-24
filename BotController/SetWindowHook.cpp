@@ -44,7 +44,6 @@ DWORD hookBotThread(HWND hwnd) {
 	}*/
 	
 	//int t = int(dThreadId);
-	
 
 	// 获取当前线程ID
 	DWORD dThreadId = GetCurrentThreadId();

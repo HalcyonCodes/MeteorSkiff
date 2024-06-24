@@ -21,7 +21,7 @@ void testLuaController() {
 	luaExecutor->luaInit(); //创建lua环境
 	luaExecutor->luaAddAllFunc();  //添加所有lua函数以便注册
 	luaExecutor->luaRegistFuncs();  //注册所有lua函数
-	//============Y
+	//===========
 
 	const char* scriptJson = "{\"script\":\"test\"}"; //用于指定lua文件名称的json格式字符串
 

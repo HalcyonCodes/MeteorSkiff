@@ -13,6 +13,8 @@
 #include "GetHwndByPID.h"
 #include "BotThread.h"
 #include "TestLuaController.h"
+#include "TestOrderManager.h"
+#include "SetWindowHookOrder.h"
 
 #define MAX_LOADSTRING 100
 
@@ -60,7 +62,11 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
     }
 
     //这里需要等待线程hook完成才能启动sendmessage线程
-    while (botHwnd == nullptr)
+   // while (botHwnd == nullptr)
+    //{
+
+    //}
+    while (orderMangerHwnd == nullptr)
     {
 
     }
@@ -80,7 +86,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
    //ResumeThread(hThread2);
 
     //========测试luaController的线程========
-    LPTHREAD_START_ROUTINE luaTestThread = (LPTHREAD_START_ROUTINE)testLuaController;
+    /*LPTHREAD_START_ROUTINE luaTestThread = (LPTHREAD_START_ROUTINE)testLuaController;
     HANDLE hThread2 = CreateThread(NULL, 0, luaTestThread, NULL, CREATE_SUSPENDED, NULL);
     if (hThread2 == NULL)
     {
@@ -91,6 +97,21 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 
 
     ResumeThread(hThread2);
+    */
+
+    //========测试OrderManager的线程========
+    LPTHREAD_START_ROUTINE orderTestThread = (LPTHREAD_START_ROUTINE)testOrderManager;
+    HANDLE hThread3 = CreateThread(NULL, 0, orderTestThread, NULL, CREATE_SUSPENDED, NULL);
+    if (hThread3 == NULL)
+    {
+
+    }
+
+    SetThreadPriority(hThread3, THREAD_PRIORITY_BELOW_NORMAL);
+
+
+    ResumeThread(hThread3);
+
 
 
     //====

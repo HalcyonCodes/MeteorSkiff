@@ -9,16 +9,20 @@
 #include "rapidjson/document.h"
 #include "rapidjson/stringbuffer.h"
 #include "rapidjson/writer.h"
-
+#include "SetWindowHookOrder.h"
+#include "GetHwndByPID.h"
 
 using namespace std;
 using namespace rapidjson;
 
-std::mutex mtx;
+//std::mutex mtx;
+
+//std::mutex t_mutex;
+
+
+OrderManager* orderManager = nullptr;
 
 void OrderManager::addServerOrders() {
-	std::lock_guard<std::mutex> lock(mtx);
-
 	Document orderDoc;
 	Document httpResultDoc;
 	httpResultDoc.Parse(this->httpResultBody);
@@ -27,14 +31,28 @@ void OrderManager::addServerOrders() {
 
 	for (const auto& t : this->orders) {
 		orderDoc.Parse(t);
+
 		orderIds.push_back(orderDoc["orderId"].GetString());
 	}
 
 	for (const auto& order : httpResultDoc["orders"].GetArray()) {
 		const char* httpOrderId = order["orderId"].GetString();
 
-		// 检查 orderId 是否已经处理过
-		if (std::find(orderIds.begin(), orderIds.end(), httpOrderId) == orderIds.end()) {
+		bool isHas = false;
+		for (const auto& t : orderIds) {
+			//dbgPrint("t1:%s", t);
+			//dbgPrint("t2:%s", httpOrderId);
+			isHas = (strcmp(t, httpOrderId) == 0);
+			if (isHas == true) {
+				break;
+			}
+			
+		}
+
+		if (isHas == true) {
+			
+		}
+		else {
 			// 构建新订单的 JSON 字符串
 			rapidjson::StringBuffer strBuf;
 			rapidjson::Writer<rapidjson::StringBuffer> writer(strBuf);
@@ -73,10 +91,11 @@ void OrderManager::addServerOrders() {
 			string newOrder = strBuf.GetString();
 			char* newOrderChar = new char[newOrder.length() + 1];
 			strcpy_s(newOrderChar, newOrder.length() + 1, newOrder.c_str());
-			this->orders.push_back(strBuf.GetString());
+			this->orders.push_back(newOrderChar);
+
 		}
-		return;
 	}
+	return;
 }
 
 void OrderManager::pullServerOrders() {
@@ -87,15 +106,27 @@ void OrderManager::pullServerOrders() {
 	}
 
 	//获取所有订单，服务器地址 http://ip:port/orders
-	string http = "http://" + string(this->serverIp);
+	string http = string(this->serverIp);
+	string port = string(this->port);
 
-	httplib::Client client(http, std::atoi(this->port));
+	httplib::Client client(http + ":" + port);
+
+	if (this->jwt == nullptr) {
+		this->login();
+	}
 
 	client.set_default_headers({
 		{"Authorization", this->jwt} // 设置默认的请求头部，包含 JWT 令牌
 		});
 
-	auto res = client.Get("/orders");
+	//====生产地址====
+	//auto res = client.Get("/orders");
+
+	//====测试地址====
+    //====/mock/00b44ac4-9575-4322-bcc8-583a9fcac8ce/orders====
+	auto res = client.Get("/mock/00b44ac4-9575-4322-bcc8-583a9fcac8ce/orders");
+	//==================
+
 
 	if (res->status == 401) {
 		this->login();
@@ -114,27 +145,38 @@ void OrderManager::pullServerOrders() {
 
 
 string OrderManager::popServerOrder() {
+
+	//dbgPrint("sss1:%d", orderMangerHwnd);
+	//dbgPrint("sss2:%d", getCurrentHwnd());
+
 	// 检查 orders 列表是否为空
 	if (!this->orders.empty()) {
 		// 获取指向第一个订单的指针
 		const char* order = this->orders.front();
 		// 从列表中移除第一个订单
 		orders.pop_front();
-		// 使用 char* 创建 std::string 对象，std::string 将接管内存管理
-		std::string result(order);
+		
+		//std::string result(order);
+
+		string result = string(order);
+
+		delete[] order;
+
 		// 返回 std::string 对象
 		return result;
 	}
 	else {
 		// 如果列表为空，返回空字符串
-		return std::string();
+		return "";
 	}
 }
 
 int OrderManager::sendOrderStatus(const char* orderId, const char* status) {
 
-	string http = "http://" + string(this->serverIp);
-	httplib::Client client(http, std::atoi(this->port));
+	string http = string(this->serverIp);
+	string port = string(this->port);
+
+	httplib::Client client(http + ":" + port);
 	client.set_default_headers({
 		{"Authorization", this->jwt}
 		});
@@ -156,6 +198,7 @@ int OrderManager::sendOrderStatus(const char* orderId, const char* status) {
 
 void OrderManager::init() {
 
+
 	//清理配置文件
 	if (this->serverIp != nullptr) {
 		delete[] this->serverIp;
@@ -171,8 +214,15 @@ void OrderManager::init() {
 		delete[] this->botPwd;
 	}
 
+
 	//读取配置文件
-	INIReader reader("config.ini");
+	char currentDirectory[MAX_PATH];
+	DWORD length = GetCurrentDirectoryA(MAX_PATH, currentDirectory);
+	std::string configPath(currentDirectory);
+	configPath += "\\config.ini";
+
+
+	INIReader reader(configPath);
 	if (reader.ParseError() < 0) {
 		dbgPrint("Error: Unable to load config.ini");
 		return;
@@ -183,9 +233,9 @@ void OrderManager::init() {
 	string password = reader.Get("user", "password", "");
 
 	const char* charServerIp = serverIp.c_str();
-	const char* charServerPort = serverIp.c_str();
-	const char* charServerUserName = serverIp.c_str();
-	const char* charPassword = serverIp.c_str();
+	const char* charServerPort = serverPort.c_str();
+	const char* charServerUserName = userName.c_str();
+	const char* charPassword = password.c_str();
 
 	this->serverIp = new char[strlen(charServerIp) + 1];
 	this->port = new char[strlen(charServerPort) + 1];
@@ -205,6 +255,7 @@ void OrderManager::init() {
 
 void OrderManager::login() {
 
+
 	//删除指针
 	if (this->jwt != nullptr) {
 		delete[] this->jwt;
@@ -212,27 +263,36 @@ void OrderManager::login() {
 	}
 
 	//登录并获取获取令牌
-	string http = "http://" + string(this->serverIp);
-	httplib::Client client(http, std::atoi(this->port));
+	string http = string(this->serverIp);
+	string port = string(this->port); 
+	httplib::Client client(http + ":" + port);
 
 	// 构建 POST 请求的 JSON 数据
 	std::string postJson =
-		"{\"botAccount\": \"" +
+		"{\"botAccount\" : " +
 		string(this->botAccount) +
-		"\"," +
+		"," +
 		"\"password\": \"" +
 		string(this->botPwd) +
 		"\"" +
 		"}";
-	//获取jwt令牌,服务器地址 http://ip:port/jwt
-	auto res = client.Post("/jwt", postJson, "application/json");
+	//获取jwt令牌,服务器地址 http://ip:port/login
+	//auto res = client.Post("/login", postJson, "application/json");
+
+	//====测试地址====
+	//====/mock/00b44ac4-9575-4322-bcc8-583a9fcac8ce/login====
+	auto res = client.Post("/mock/00b44ac4-9575-4322-bcc8-583a9fcac8ce/login", postJson, "application/json");
+	//==================
+	
 	// 检查响应状态码
 	if (res && res->status == 200) {
 		Document doc;
 		doc.Parse(res->body.c_str());
-
-		this->jwt = new char[strlen(doc["token"].GetString()) + 1];
-		strcpy_s(this->jwt, strlen(doc["token"].GetString() + 1), doc["token"].GetString());
+		string token = doc["token"].GetString() ;
+		token = token + "\0";
+		this->jwt = new char[strlen(token.c_str()) + 4];
+		//int q = token.length() + 2;
+		strcpy_s(this->jwt, strlen(token.c_str()) + 1, token.c_str());
 	}
 	return;
 }
