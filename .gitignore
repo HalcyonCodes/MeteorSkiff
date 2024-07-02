@@ -49,7 +49,6 @@
 bin/
 obj/
 Lib/
-TestBin/
 Bin/
 Debug/
 .vs/*
