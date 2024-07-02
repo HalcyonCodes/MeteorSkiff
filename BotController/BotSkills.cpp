@@ -7,6 +7,7 @@
 #include "GetScreen.h"
 #include "BotSkills.h"
 #include "SetWindowHook.h"
+#include "InputAction.h"
 
 
 
@@ -270,6 +271,218 @@ LRESULT CALLBACK actionsProc(int code, WPARAM wParam, LPARAM lParam) {
 				delete(bmpColor);
 				break;
 			}
+
+			//====模拟键鼠输入模块====
+			case in001: {
+				//in001
+				//----1.处理参数----
+				MsgInput* msgInterface = static_cast<MsgInput*>((void*)(lpArg->lParam));
+
+				//----2.调用----
+				InputAction* inputAction = new InputAction();
+				inputAction->init(msgInterface->windowName);
+
+				//----3.处理----
+				delete(inputAction);
+				break;
+			}
+			case in002: {
+				//in002
+				//----1.处理参数----
+				MsgInput* msgInterface = static_cast<MsgInput*>((void*)(lpArg->lParam));
+
+				//----2.调用----
+				InputAction* inputAction = new InputAction();
+				int result = inputAction->lClickDown(msgInterface->time);
+
+				//----3.处理----
+				msgInterface->result = result;
+				delete(inputAction);
+				break;
+			}
+			case in003: {
+				//in003
+				//----1.处理参数----
+				MsgInput* msgInterface = static_cast<MsgInput*>((void*)(lpArg->lParam));
+
+				//----2.调用----
+				InputAction* inputAction = new InputAction();
+				int result = inputAction->rClickDown(msgInterface->time);
+
+				//----3.处理----
+				msgInterface->result = result;
+				delete(inputAction);
+				break;
+			}
+			case in004: {
+				//in004
+				//----1.处理参数----
+				MsgInput* msgInterface = static_cast<MsgInput*>((void*)(lpArg->lParam));
+
+				//----2.调用----
+				InputAction* inputAction = new InputAction();
+				int result = inputAction->mClickDown(msgInterface->time);
+
+				//----3.处理----
+				msgInterface->result = result;
+				delete(inputAction);
+				break;
+			}
+			case in005: {
+				//in005
+				//----1.处理参数----
+				MsgInput* msgInterface = static_cast<MsgInput*>((void*)(lpArg->lParam));
+
+				//----2.调用----
+				InputAction* inputAction = new InputAction();
+				int result = inputAction->lClickUp();
+
+				//----3.处理----
+				msgInterface->result = result;
+				delete(inputAction);
+				break;
+			}
+			case in006: {
+				//in006
+				//----1.处理参数----
+				MsgInput* msgInterface = static_cast<MsgInput*>((void*)(lpArg->lParam));
+
+				//----2.调用----
+				InputAction* inputAction = new InputAction();
+				int result = inputAction->rClickUp();
+
+				//----3.处理----
+				msgInterface->result = result;
+				delete(inputAction);
+				break;
+			}
+			case in007: {
+				//in007
+				//----1.处理参数----
+				MsgInput* msgInterface = static_cast<MsgInput*>((void*)(lpArg->lParam));
+
+				//----2.调用----
+				InputAction* inputAction = new InputAction();
+				int result = inputAction->mClickUp();
+
+				//----3.处理----
+				msgInterface->result = result;
+				delete(inputAction);
+				break;
+			}
+			case in008: {
+				//in008
+				//----1.处理参数----
+				MsgInput* msgInterface = static_cast<MsgInput*>((void*)(lpArg->lParam));
+
+				//----2.调用----
+				InputAction* inputAction = new InputAction();
+				int result = inputAction->moveTo(msgInterface->mouseX, msgInterface->mouseY);
+
+				//----3.处理----
+				msgInterface->result = result;
+				delete(inputAction);
+				break;
+			}
+			case in009: {
+				//in009
+				//----1.处理参数----
+				MsgInput* msgInterface = static_cast<MsgInput*>((void*)(lpArg->lParam));
+
+				//----2.调用----
+				InputAction* inputAction = new InputAction();
+				int result = inputAction->moveToChange(msgInterface->mouseX, msgInterface->mouseY);
+
+				//----3.处理----
+				msgInterface->result = result;
+				delete(inputAction);
+				break;
+			}
+			case in010: {
+				//in010
+				//----1.处理参数----
+				MsgInput* msgInterface = static_cast<MsgInput*>((void*)(lpArg->lParam));
+
+				//----2.调用----
+				InputAction* inputAction = new InputAction();
+				int result = inputAction->mOnClick();
+
+				//----3.处理----
+				msgInterface->result = result;
+				delete(inputAction);
+				break;
+			}
+			case in011: {
+				//in011
+				//----1.处理参数----
+				MsgInput* msgInterface = static_cast<MsgInput*>((void*)(lpArg->lParam));
+
+				//----2.调用----
+				InputAction* inputAction = new InputAction();
+				int result = inputAction->lOnClick();
+
+				//----3.处理----
+				msgInterface->result = result;
+				delete(inputAction);
+				break;
+			}
+			case in012: {
+				//in012
+				//----1.处理参数----
+				MsgInput* msgInterface = static_cast<MsgInput*>((void*)(lpArg->lParam));
+
+				//----2.调用----
+				InputAction* inputAction = new InputAction();
+				int result = inputAction->rOnClick();
+
+				//----3.处理----
+				msgInterface->result = result;
+				delete(inputAction);
+				break;
+			}
+			case in013: {
+				//in013
+				//----1.处理参数----
+				MsgInput* msgInterface = static_cast<MsgInput*>((void*)(lpArg->lParam));
+
+				//----2.调用----
+				InputAction* inputAction = new InputAction();
+				int result = inputAction->keyDown(msgInterface->key, msgInterface->time);
+
+				//----3.处理----
+				msgInterface->result = result;
+				delete(inputAction);
+				break;
+			}
+			case in014: {
+				//in014
+				//----1.处理参数----
+				MsgInput* msgInterface = static_cast<MsgInput*>((void*)(lpArg->lParam));
+
+				//----2.调用----
+				InputAction* inputAction = new InputAction();
+				int result = inputAction->keyUp(msgInterface->key);
+
+				//----3.处理----
+				msgInterface->result = result;
+				delete(inputAction);
+				break;
+			}
+			case in015: {
+				//in015
+				//----1.处理参数----
+				MsgInput* msgInterface = static_cast<MsgInput*>((void*)(lpArg->lParam));
+
+				//----2.调用----
+				InputAction* inputAction = new InputAction();
+				int result = inputAction->keyPress(msgInterface->key);
+
+				//----3.处理----
+				msgInterface->result = result;
+				delete(inputAction);
+				break;
+			}
+
 
 
 			}

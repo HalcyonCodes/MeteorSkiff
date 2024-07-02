@@ -33,6 +33,9 @@
     <ClInclude Include="Tip.h">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="InputAction.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Skill.cpp">
@@ -45,6 +48,9 @@
       <Filter>源文件</Filter>
     </ClCompile>
     <ClCompile Include="GetScreen.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="InputAction.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>

@@ -47,9 +47,16 @@ typedef struct MsgFindWindow {
 	char* windowName;
 }_MsgFindWindow;
 
-
-
-
+//==========
+//IM001-IM015
+typedef struct MsgInput {
+	char* windowName = nullptr;
+	short key;
+	int time;
+	int mouseX;
+	int mouseY;
+	int result;
+}_MsgInput;
 
 
 

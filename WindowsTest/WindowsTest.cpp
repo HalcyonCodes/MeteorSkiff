@@ -62,28 +62,28 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
     }
 
     //这里需要等待线程hook完成才能启动sendmessage线程
-   // while (botHwnd == nullptr)
+   while (botHwnd == nullptr)
+   {
+
+    }
+    //while (orderMangerHwnd == nullptr)
     //{
 
     //}
-    while (orderMangerHwnd == nullptr)
+
+    //=========测试msgController的线程==========
+    LPTHREAD_START_ROUTINE botThread2 = (LPTHREAD_START_ROUTINE)testBotController;
+    HANDLE hThread2 = CreateThread(NULL, 0, botThread2, NULL, CREATE_SUSPENDED, NULL);
+    if (hThread2 == NULL)
     {
 
     }
 
-    //=========测试msgController的线程==========
-    //LPTHREAD_START_ROUTINE botThread2 = (LPTHREAD_START_ROUTINE)testBotController;
-    //HANDLE hThread2 = CreateThread(NULL, 0, botThread2, NULL, CREATE_SUSPENDED, NULL);
-    //if (hThread2 == NULL)
-    //{
-
-    //}
-
     // Set the thread to run in the background
-    //SetThreadPriority(hThread2, THREAD_PRIORITY_BELOW_NORMAL);
+    SetThreadPriority(hThread2, THREAD_PRIORITY_BELOW_NORMAL);
 
     // Start the thread
-   //ResumeThread(hThread2);
+    ResumeThread(hThread2);
 
     //========测试luaController的线程========
     /*LPTHREAD_START_ROUTINE luaTestThread = (LPTHREAD_START_ROUTINE)testLuaController;
@@ -100,17 +100,17 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
     */
 
     //========测试OrderManager的线程========
-    LPTHREAD_START_ROUTINE orderTestThread = (LPTHREAD_START_ROUTINE)testOrderManager;
-    HANDLE hThread3 = CreateThread(NULL, 0, orderTestThread, NULL, CREATE_SUSPENDED, NULL);
-    if (hThread3 == NULL)
-    {
+    //LPTHREAD_START_ROUTINE orderTestThread = (LPTHREAD_START_ROUTINE)testOrderManager;
+    //HANDLE hThread3 = CreateThread(NULL, 0, orderTestThread, NULL, CREATE_SUSPENDED, NULL);
+    //if (hThread3 == NULL)
+    //{
 
-    }
+    //}
 
-    SetThreadPriority(hThread3, THREAD_PRIORITY_BELOW_NORMAL);
+    //SetThreadPriority(hThread3, THREAD_PRIORITY_BELOW_NORMAL);
 
 
-    ResumeThread(hThread3);
+    //ResumeThread(hThread3);
 
 
 

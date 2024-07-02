@@ -12,6 +12,9 @@
 #include "DbgPrint.h"
 #include "OrderController.h"
 
+
+
+
 using namespace rapidjson;
 
 void MeteorSkiffBot::botInit() {
@@ -51,19 +54,11 @@ int MeteorSkiffBot::botRun() {
             luaExecutor->luaAddAllFunc();  //添加所有lua函数以便注册
             luaExecutor->luaRegistFuncs();  //注册所有lua函数
 
-			string status;
-			Document doc;
-			doc.Parse(targetOrder.c_str());
-			string orderId = doc["orderId"].GetString();
 
-			//2.更新订单状态(暂时忽略)
-			status = "working";
-			//msgSendOrderStatus(orderManager, orderId, status);
-
-			//3.构造脚本
+			//1.构造脚本
 			this->actionManager->buildScript(targetOrder.c_str());
 
-			//4.lua执行器加载脚本
+			//2.lua执行器加载脚本
 			//char* luaScript = this->actionManager->script;
 			this->luaExecutor->luaLoadScripts(this->actionManager->script); //luaL_loadbuffer函数有内存泄漏问题
 			if (this->actionManager->script != nullptr) {
@@ -71,7 +66,7 @@ int MeteorSkiffBot::botRun() {
 				this->actionManager->script = nullptr;
 			}
 
-			//5.开始调用
+			//3.开始调用
 			try
 			{
 				this->luaExecutor->luaExecuteBuff();
@@ -83,15 +78,20 @@ int MeteorSkiffBot::botRun() {
 			}
 
 
-			//6.发送脚本完成状态
+			//4.发送脚本完成状态
+
+			string status;
+			Document doc;
+			doc.Parse(targetOrder.c_str());
+			string orderId = doc["orderId"].GetString();
 			status = "complete";
-			//msgSendOrderStatus(orderManager, orderId, status);
+			msgSendOrderStatus(orderManager, orderId, status);
 
 			//7.清理lua执行器
 			luaExecutor->luaExit();
 			delete  this->luaExecutor;
 			this->luaExecutor = nullptr;
-
+		
 		}
 	
 

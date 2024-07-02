@@ -43,11 +43,11 @@ DWORD WINAPI testBotThread(LPVOID lpParam)
 
 
 	//hookBot
-	//hookBotThread(hwnd);
+	hookBotThread(hwnd);
 
 	//====hookOrderManager====
-	orderManager = new OrderManager();
-	hookOrderThread(hwnd);
+	//orderManager = new OrderManager();
+	//hookOrderThread(hwnd);
 	
 	//orderManager->init();
 	//========

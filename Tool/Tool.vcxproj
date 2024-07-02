@@ -145,6 +145,7 @@
   <ItemGroup>
     <ClInclude Include="DbgPrint.h" />
     <ClInclude Include="framework.h" />
+    <ClInclude Include="GBKToUTF8.h" />
     <ClInclude Include="GetHwndByPID.h" />
     <ClInclude Include="pch.h" />
     <ClInclude Include="rapidjson\allocators.h" />
@@ -171,6 +172,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="DbgPrint.cpp" />
+    <ClCompile Include="GBKToUTF8.cpp" />
     <ClCompile Include="GetHwndByPID.cpp" />
     <ClCompile Include="pch.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>

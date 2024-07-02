@@ -8,6 +8,7 @@
 #include "MsgInterface.h"
 #include "BotSkills.h"
 #include "TestBotController.h"
+#include "InputActionController.h"
 
 HWND hwndHidden;
 
@@ -22,13 +23,13 @@ void testBotController() {
 	//dbgPrint("HWND:%d", hwnd);
 
 	//====bmp001 loadBmp====
-	msgLoadBmp("C:\\Users\\reddock\\Desktop\\BMPTEST\\testFincPic1.bmp|C:\\Users\\reddock\\Desktop\\BMPTEST\\testFincPic2.bmp");
+	//msgLoadBmp("C:\\Users\\reddock\\Desktop\\BMPTEST\\testFincPic1.bmp|C:\\Users\\reddock\\Desktop\\BMPTEST\\testFincPic2.bmp");
 
 	//====bmp002 loadBmpSub====
-	msgLoadBmpSub("C:\\Users\\reddock\\Desktop\\BMPTEST\\testFincPic1.bmp|C:\\Users\\reddock\\Desktop\\BMPTEST\\testFincPic2.bmp");
+	//msgLoadBmpSub("C:\\Users\\reddock\\Desktop\\BMPTEST\\testFincPic1.bmp|C:\\Users\\reddock\\Desktop\\BMPTEST\\testFincPic2.bmp");
 
 	//====bmp003 loadBmpList====
-	msgLoadBmpList("C:\\Users\\reddock\\Desktop\\BMPTEST\\testFincPic1.bmp|C:\\Users\\reddock\\Desktop\\BMPTEST\\testFincPic2.bmp");
+	//msgLoadBmpList("C:\\Users\\reddock\\Desktop\\BMPTEST\\testFincPic1.bmp|C:\\Users\\reddock\\Desktop\\BMPTEST\\testFincPic2.bmp");
 
 	//====bmp004 freeBmp====
 	//msgFreeBmp();
@@ -164,6 +165,63 @@ void testBotController() {
 
 	}*/
     //====msg测试通过：2024/5/9====
+
+    //========================
+    //====Input Action模块====
+    //========================
+
+     
+	//====ins001 inputInit====
+    //msgInputInit("按键抓抓辅助工具2014.05.16868");
+
+    //====ins002  lClickDown====
+    //msgLClickDown(0);
+
+	//====ins003 rClickDown====
+	//msgRClickDown(0);
+
+	//====ins004 mClickDown====
+	//msgMClickDown(0);
+
+	//====ins005 lClickUp====
+	//msgLClickUp();
+
+	//====ins006 rClickUp====
+	//msgRClickUp();
+
+	//====ins007 mClickUp====
+	//msgMClickUp();
+
+	//====ins008 moveTo====
+	//msgMoveTo(0, 0);
+
+
+	//====ins009 moveToChange====
+	//msgMoveToChange(144, 100);
+
+
+	//====ins010 mOnClick====
+	//msgMOnClick();
+
+	//====ins011 lOnClick====
+	//msgLOnClick();
+
+	//====ins012 rOnClick====
+	//msgROnClick();
+
+	//====ins013 keyDown====
+	//msgKeyDown(65, 0);
+
+	//====ins014 keyUp====
+	//msgKeyUp(65);
+
+	//Sleep(3000);
+	//====ins015 keyPress====
+	//msgKeyPress(65);
+
+
+
+
 
 	MSG msg;
 	while (GetMessage(&msg, NULL, 0, 0)) {

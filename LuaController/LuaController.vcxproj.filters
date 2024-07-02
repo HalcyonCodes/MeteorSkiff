@@ -27,6 +27,12 @@
     <ClInclude Include="FindPicLuaFuncs.h">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="ToolLuaFuncs.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="InputLuaFuncs.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="LuaController.cpp">
@@ -42,6 +48,12 @@
       <Filter>源文件</Filter>
     </ClCompile>
     <ClCompile Include="LuaAddFuncs.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="ToolLuaFuncs.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="InputLuaFuncs.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>

@@ -25,6 +25,11 @@ OrderManager* orderManager = nullptr;
 void OrderManager::addServerOrders() {
 	Document orderDoc;
 	Document httpResultDoc;
+
+	if (this->httpResultBody == nullptr) {
+		return;
+	}
+
 	httpResultDoc.Parse(this->httpResultBody);
 
 	list<const char*> orderIds;
@@ -76,7 +81,18 @@ void OrderManager::addServerOrders() {
 			for (const auto& para : order["orderParas"].GetObj()) {
 				writer.StartObject();
 				writer.Key(para.name.GetString());
-				writer.String(para.value.GetString());
+				if (para.value.IsInt() == true) {
+					writer.Int(para.value.GetInt());
+				}
+				if (para.value.IsDouble() == true) {
+					writer.Double(para.value.GetDouble());
+				}
+				if (para.value.IsString() == true) {
+					writer.String(para.value.GetString());
+				}
+				if (para.value.IsBool() == true) {
+					writer.Bool(para.value.GetBool());
+				}
 				writer.EndObject();
 			}
 			writer.EndArray();
@@ -115,18 +131,30 @@ void OrderManager::pullServerOrders() {
 		this->login();
 	}
 
-	client.set_default_headers({
+	if (this->jwt != nullptr) {
+		client.set_default_headers({
 		{"Authorization", this->jwt} // 设置默认的请求头部，包含 JWT 令牌
-		});
+			});
+	}
 
 	//====生产地址====
 	//auto res = client.Get("/orders");
 
 	//====测试地址====
     //====/mock/00b44ac4-9575-4322-bcc8-583a9fcac8ce/orders====
-	auto res = client.Get("/mock/00b44ac4-9575-4322-bcc8-583a9fcac8ce/orders");
+	httplib::Result res = client.Get("/mock/00b44ac4-9575-4322-bcc8-583a9fcac8ce/orders");
 	//==================
+	if (res) {
 
+	}
+	else {
+		//没有响应
+		if (this->httpResultBody != nullptr) {
+			delete[] this->httpResultBody;
+			this->httpResultBody = nullptr;
+		}
+		return;
+	}
 
 	if (res->status == 401) {
 		this->login();
@@ -151,8 +179,20 @@ string OrderManager::popServerOrder() {
 
 	// 检查 orders 列表是否为空
 	if (!this->orders.empty()) {
+
 		// 获取指向第一个订单的指针
 		const char* order = this->orders.front();
+
+
+		//取出订单的同时向服务器发送订单状态信息, 冻结订单。
+
+		string status;
+		Document doc;
+		doc.Parse(order);
+		string orderId = doc["orderId"].GetString();
+		status = "working";
+		this->sendOrderStatus(orderId.c_str(), status.c_str());
+
 		// 从列表中移除第一个订单
 		orders.pop_front();
 		
@@ -190,14 +230,16 @@ int OrderManager::sendOrderStatus(const char* orderId, const char* status) {
 		"\"}";
 	client.set_default_headers({
 	 {"Authorization", this->jwt} // 设置默认的请求头部，包含 JWT 令牌
-		});
-	auto res = client.Post("/setOrderStatus", postJson, "application/json");
+	});
+
+	//auto res = client.Post("/setOrderStatus", postJson, "application/json");
+	auto res = client.Post("/mock/00b44ac4-9575-4322-bcc8-583a9fcac8ce/setOrderStatus", postJson, "application/json");
+
 	return res->status;
 }
 
 
 void OrderManager::init() {
-
 
 	//清理配置文件
 	if (this->serverIp != nullptr) {
@@ -214,19 +256,18 @@ void OrderManager::init() {
 		delete[] this->botPwd;
 	}
 
-
 	//读取配置文件
 	char currentDirectory[MAX_PATH];
 	DWORD length = GetCurrentDirectoryA(MAX_PATH, currentDirectory);
 	std::string configPath(currentDirectory);
 	configPath += "\\config.ini";
 
-
 	INIReader reader(configPath);
 	if (reader.ParseError() < 0) {
 		dbgPrint("Error: Unable to load config.ini");
 		return;
 	}
+
 	string serverIp = reader.Get("server", "ip", "127.0.0.1");
 	string serverPort = reader.Get("server", "port", "80");
 	string userName = reader.Get("user", "name", "guest");
@@ -254,7 +295,6 @@ void OrderManager::init() {
 
 
 void OrderManager::login() {
-
 
 	//删除指针
 	if (this->jwt != nullptr) {
@@ -284,6 +324,18 @@ void OrderManager::login() {
 	auto res = client.Post("/mock/00b44ac4-9575-4322-bcc8-583a9fcac8ce/login", postJson, "application/json");
 	//==================
 	
+	if (res) {
+
+	}
+	else
+	{
+		if (this->jwt != nullptr) {
+			delete[] this->jwt;
+			this->jwt = nullptr;
+		}
+		return;
+	}
+
 	// 检查响应状态码
 	if (res && res->status == 200) {
 		Document doc;

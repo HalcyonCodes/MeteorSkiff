@@ -15,10 +15,14 @@
 
 #include <list>
 
+#include "GBKToUTF8.h"
+
+
 using namespace rapidjson;
 
-int ActionManager::loadAllScript() {
 
+
+int ActionManager::loadAllScript() {
 
     char dirPathName[MAX_PATH] = {};
     GetModuleFileNameA(GetModuleHandle(NULL), dirPathName, MAX_PATH);
@@ -49,26 +53,29 @@ int ActionManager::loadAllScript() {
 
             std::string fullPath = path + "\\" + findFileData.cFileName;
             //dbgPrint("路径：%s", fullPath.c_str());
-
+  
             std::string content;
             std::ifstream file(fullPath);
+            
             if (!file.is_open()) {
                 dbgPrint("错误：无法打开文件：%s", fullPath.c_str());
                 continue;
             }
-   
+
             std::string line;
+            //std::string temp;
             while (std::getline(file, line)) {
-                line = line + "\0";
-                //dbgPrint("行：%s", line.c_str());
+                line = line + "\0"; //这里需要注意把lua文件另存为ANSI编码,不然中文会乱码
+                //temp = String::Utf8ToAnsi(line);
+                //temp = String::AnsiToUtf8(line);
                 content += line;
                 content += '\n';
             }
-            
+           
             content = content + "\0";
 
+            //dbgPrint("gbkTest：%s", content.c_str());
             file.close();
-            //8dbgPrint("内容大小：%d", content.length());
 
             char* bufTemp = new char[content.length() + 2];
             strcpy_s(bufTemp, content.length() + 1, content.c_str());
@@ -119,7 +126,20 @@ char* ActionManager::getScriptPara(const char* json) {
         for (const auto& para : orderParas) {
             if (para.IsObject()) {
                 for (const auto& kv : para.GetObject()) {
-                    std::string nextRow = "para[" + std::string(kv.name.GetString()) + "] = " + kv.value.GetString();
+					std::string nextRow;
+					if (kv.value.IsInt()) {
+						nextRow = "para[\"" + std::string(kv.name.GetString()) + "\"] = " + std::to_string(kv.value.GetInt()) + ";";
+					}
+					if (kv.value.IsString()) {
+						nextRow = "para[\"" + std::string(kv.name.GetString()) + "\"] = \"" + std::string(kv.value.GetString()) + "\";";
+					}
+					if (kv.value.IsDouble()) {
+						nextRow = "para[\"" + std::string(kv.name.GetString()) + "\"] = " + std::to_string(kv.value.GetDouble()) + ";";
+					}
+					if (kv.value.IsBool()) {
+						nextRow = "para[\"" + std::string(kv.name.GetString()) + "\"] = " + std::to_string(kv.value.GetBool()) + ";";
+					}
+
                     luaCommond += nextRow;
                     luaCommond += "\n";
                 }

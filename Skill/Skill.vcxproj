@@ -147,6 +147,7 @@
     <ClInclude Include="BmpColor.h" />
     <ClInclude Include="framework.h" />
     <ClInclude Include="GetScreen.h" />
+    <ClInclude Include="InputAction.h" />
     <ClInclude Include="pch.h" />
     <ClInclude Include="Skill.h" />
     <ClInclude Include="Tip.h" />
@@ -154,6 +155,7 @@
   <ItemGroup>
     <ClCompile Include="BmpColor.cpp" />
     <ClCompile Include="GetScreen.cpp" />
+    <ClCompile Include="InputAction.cpp" />
     <ClCompile Include="pch.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>

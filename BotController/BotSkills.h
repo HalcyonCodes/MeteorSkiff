@@ -45,6 +45,21 @@
 
 //----2.模拟键鼠输入模块----
 #define in001 30
+#define in002 31
+#define in003 32
+#define in004 33
+#define in005 34
+#define in006 35
+#define in007 36
+#define in008 37
+#define in009 38
+#define in010 39
+#define in011 40
+#define in012 41
+#define in013 42
+#define in014 43
+#define in015 44
+
 
 
 //----钩子函数----

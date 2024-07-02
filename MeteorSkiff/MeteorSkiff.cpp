@@ -12,6 +12,7 @@
 #include "MeteorSkiffBotCtrlThread.h"
 #include "OrderManagerBotCtrlThread.h"
 #include "OrderManager.h"
+#include "Windows.h"
 
 #define MAX_LOADSTRING 100
 
@@ -35,6 +36,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
     UNREFERENCED_PARAMETER(lpCmdLine);
 
     // TODO: 在此处放置代码。
+
 
     // 初始化全局字符串
     LoadStringW(hInstance, IDS_APP_TITLE, szTitle, MAX_LOADSTRING);

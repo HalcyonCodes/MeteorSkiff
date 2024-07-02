@@ -21,6 +21,8 @@ int BmpColor::loadBmp(string paths) {
 	BlessFindPic::BmpColor^ bmpColor = gcnew BlessFindPic::BmpColor();
 	String^ parPaths = marshal_as<System::String^>(paths);
 	Int32 result = bmpColor->loadBmp(parPaths);
+	delete bmpColor;
+	bmpColor = nullptr;
 	this -> result = result;
 	return this -> result;
 }
@@ -31,6 +33,8 @@ int BmpColor::loadBmpSub(string paths) {
 	String^ parPaths = marshal_as<System::String^>(paths);
 	Int32 result = bmpColor->loadBmpSub(parPaths); 
 	this->result = result;
+	delete bmpColor;
+	bmpColor = nullptr;
 	return this->result;
 }
 
@@ -39,12 +43,17 @@ int BmpColor::loadBmpList(string paths) {
 	String^ parPaths = marshal_as<System::String^>(paths);
 	Int32 result = bmpColor->loadBmpList(parPaths);
 	this->result = result;
+	delete bmpColor;
+	bmpColor = nullptr;
 	return this->result;
 }
 
 void BmpColor::freeBmp() {
 	BlessFindPic::BmpColor^ bmpColor = gcnew BlessFindPic::BmpColor();
 	bmpColor -> freeBmp();
+	delete bmpColor;
+	bmpColor = nullptr;
+
 }
 
 int* BmpColor::findPAPicA(HWND hWnd, int left, int top, int right, int bottom, string path, int similar) {
@@ -63,7 +72,8 @@ int* BmpColor::findPAPicA(HWND hWnd, int left, int top, int right, int bottom, s
 		this->resultA[i] = resultArray[i];
 	}
 
-
+	delete bmpColor;
+	bmpColor = nullptr;
 	return this->resultA;
 }
 
@@ -81,6 +91,8 @@ int* BmpColor::findDAPicA(HWND hWnd, int left, int top, int right, int bottom, s
 	for (int i = 0; i < length; i++) {
 		this -> resultA[i] = resultArray[i];
 	}
+	delete bmpColor;
+	bmpColor = nullptr;
 	return this->resultA;
 }
 
@@ -97,6 +109,8 @@ int* BmpColor::findSAPicA(HWND hWnd, int left, int top, int right, int bottom, s
 	for (int i = 0; i < length; i++) {
 		this->resultA[i] = resultArray[i];
 	}
+	delete bmpColor;
+	bmpColor = nullptr;
 	return this->resultA;
 }
 
@@ -124,6 +138,9 @@ int** BmpColor::findPAPicN(HWND hWnd, int left, int top, int right, int bottom, 
 	this -> resultN[cols - 1][0] = -1;
 	this -> resultN[cols - 1][1] = -1;
 
+	delete bmpColor;
+	bmpColor = nullptr;
+
 	return this -> resultN;
 }
 
@@ -149,6 +166,10 @@ int** BmpColor::findDAPicN(HWND hWnd, int left, int top, int right, int bottom, 
 	}
 	this -> resultN[cols - 1][0] = -1;
 	this -> resultN[cols - 1][1] = -1;
+
+	delete bmpColor;
+	bmpColor = nullptr;
+
 	return this -> resultN;
 }
 
@@ -164,6 +185,10 @@ int* BmpColor::findLNPicA(HWND hWnd, int left, int top, int right, int bottom, i
 	for (int i = 0; i < length; i++) {
 		this -> resultA[i] = resultArray[i];
 	}
+
+	delete bmpColor;
+	bmpColor = nullptr;
+
 	return this -> resultA;
 }
 
@@ -189,6 +214,10 @@ int** BmpColor::findLNPicN(HWND hWnd, int left, int top, int right, int bottom, 
 	this -> resultN[cols - 1][0] = -1;
 	this -> resultN[cols - 1][1] = -1;
 	this -> resultN[cols - 1][2] = -1;
+
+	delete bmpColor;
+	bmpColor = nullptr;
+
 	return this -> resultN;
 }
 
@@ -216,6 +245,8 @@ int** BmpColor::findSAPicN(HWND hWnd, int left, int top, int right, int bottom, 
 	this -> resultN[cols - 1][0] = -1;
 	this -> resultN[cols - 1][1] = -1;
 
+	delete bmpColor;
+	bmpColor = nullptr;
 
 	return this -> resultN;
 }

@@ -93,6 +93,9 @@
     <ClInclude Include="rapidjson\writer.h">
       <Filter>RapidJson</Filter>
     </ClInclude>
+    <ClInclude Include="GBKToUTF8.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Tool.cpp">
@@ -105,6 +108,9 @@
       <Filter>源文件</Filter>
     </ClCompile>
     <ClCompile Include="GetHwndByPID.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="GBKToUTF8.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>

@@ -11,7 +11,7 @@ extern "C" {
 //luaLTest
 int luaLTest(lua_State* L);
 //
-int luaLDbgPrint(lua_State* L);
+//int luaLDbgPrint(lua_State* L);
 //LBM001 LoadBmp
 int luaLLoadBmp(lua_State* L);
 //LBM002 loadBmpSub

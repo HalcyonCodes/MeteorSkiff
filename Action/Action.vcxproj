@@ -117,7 +117,8 @@
       <ConformanceMode>true</ConformanceMode>
       <PrecompiledHeader>Use</PrecompiledHeader>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
-      <AdditionalIncludeDirectories>..\\Tool\;..\\LuaController\;</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\\Tool\;..\\LuaController\;..\\LuaResource</AdditionalIncludeDirectories>
+      <LanguageStandard>Default</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>

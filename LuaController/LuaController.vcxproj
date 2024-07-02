@@ -147,11 +147,14 @@
   <ItemGroup>
     <ClInclude Include="FindPicLuaFuncs.h" />
     <ClInclude Include="framework.h" />
+    <ClInclude Include="InputLuaFuncs.h" />
     <ClInclude Include="LuaExecutor.h" />
     <ClInclude Include="pch.h" />
+    <ClInclude Include="ToolLuaFuncs.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="FindPicLuaFuncs.cpp" />
+    <ClCompile Include="InputLuaFuncs.cpp" />
     <ClCompile Include="LuaAddFuncs.cpp" />
     <ClCompile Include="LuaController.cpp" />
     <ClCompile Include="LuaExecutor.cpp" />
@@ -161,6 +164,7 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
+    <ClCompile Include="ToolLuaFuncs.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

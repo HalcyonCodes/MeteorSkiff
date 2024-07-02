@@ -34,13 +34,13 @@ void testSkill() {
     //===========================
 
     //BmpColor 001
-    bmpColor.loadBmp("C:\\Users\\reddock\\Desktop\\BMPTEST\\testFincPic1.bmp|C:\\Users\\reddock\\Desktop\\BMPTEST\\testFincPic2.bmp");
+    //bmpColor.loadBmp("C:\\Users\\reddock\\Desktop\\BMPTEST\\testFincPic1.bmp|C:\\Users\\reddock\\Desktop\\BMPTEST\\testFincPic2.bmp");
 
     //BmpColor 002
-    bmpColor.loadBmpSub("C:\\Users\\reddock\\Desktop\\BMPTEST\\testFincPic1.bmp|C:\\Users\\reddock\\Desktop\\BMPTEST\\testFincPic2.bmp");
+    //bmpColor.loadBmpSub("C:\\Users\\reddock\\Desktop\\BMPTEST\\testFincPic1.bmp|C:\\Users\\reddock\\Desktop\\BMPTEST\\testFincPic2.bmp");
 
     //BmpColor 003
-    bmpColor.loadBmpList("C:\\Users\\reddock\\Desktop\\BMPTEST\\testFincPic1.bmp|C:\\Users\\reddock\\Desktop\\BMPTEST\\testFincPic2.bmp");
+    //bmpColor.loadBmpList("C:\\Users\\reddock\\Desktop\\BMPTEST\\testFincPic1.bmp|C:\\Users\\reddock\\Desktop\\BMPTEST\\testFincPic2.bmp");
 
     //BmpColor 004
     //freeBmp();
@@ -174,5 +174,53 @@ void testSkill() {
     }*/
 
 
+     //====InputAction====
+     InputAction inputAction;
+
+     //InpuitAction 001
+     //inputAction.init("按键抓抓辅助工具2014.05.16868");
+
+     //InputAction 002
+     //inputAction.lClickDown(0);
+
+     //InputAction 003
+     //inputAction.rClickDown(0);
+     
+     //InputAction 004
+     //inputAction.mClickDown(0);
+
+     //InputAction 005
+     //inputAction.lClickUp();
+
+     //InputAction 006
+     //inputAction.rClickUp();
+
+     //InputAction 007
+     //inputAction.mClickUp();
+
+     //InputAction 008
+     //inputAction.moveTo(0, 0);
+
+     //InputAction 009
+     //inputAction.moveToChange(100, 100);
+
+     //InputAction 010
+     //inputAction.mOnClick();
+
+     //InputAciton 011
+     //inputAction.lOnClick();
+
+     //InputAction 012
+     //inputAction.rOnClick();
+
+     //InputAction 013
+     //inputAction.keyDown(65, 0);
+     //Sleep(1000);
+
+     //InputAction 014
+     //inputAction.keyUp(65);
+
+     //InputAction 015
+     //inputAction.keyPress(65);
 
 }

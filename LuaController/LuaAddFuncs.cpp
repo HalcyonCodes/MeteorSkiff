@@ -1,6 +1,8 @@
 #include "pch.h"
 #include "LuaExecutor.h"
 #include "FindPicLuaFuncs.h"
+#include "ToolLuaFuncs.h"
+#include "InputLuaFuncs.h"
 
 
 void LuaExecutor::luaAddAllFunc() {
@@ -45,5 +47,52 @@ void LuaExecutor::luaAddAllFunc() {
 
     // LBM012
     LuaExecutor::luaAddAFunc("findLNPicN", luaLFindLNPicN);
+
+    // LBM013
+    LuaExecutor::luaAddAFunc("freeBmp", luaLFreeBmp);
+
+    //====InputActionÄ£¿é====
+    // LIN001
+    LuaExecutor::luaAddAFunc("inputInit", luaLInputInit);
+
+    // LIN002
+    LuaExecutor::luaAddAFunc("lClickDown", luaLLeftClickDown);
+
+    // LIN003
+    LuaExecutor::luaAddAFunc("rClickDown", luaLRightClickDown);
+    
+    // LIN004
+    LuaExecutor::luaAddAFunc("mClickDown", luaLMidClickDown);
+    
+    // LIN005
+    LuaExecutor::luaAddAFunc("lClickUp", luaLLeftClickUp);
+    
+    // LIN006
+    LuaExecutor::luaAddAFunc("rClickUp", luaLRightClickUp);
+    
+    // LIN007
+    LuaExecutor::luaAddAFunc("mClickUp", luaLMidClickUp);
+    
+    // LIN008
+    LuaExecutor::luaAddAFunc("moveTo", luaLMoveTo);
+    
+    // LIN009
+    LuaExecutor::luaAddAFunc("moveToChange", luaLMoveToChange);
+    
+    // LIN010
+    LuaExecutor::luaAddAFunc("mOnClick", luaLMidOnClick);
+    
+    // LIN011
+    LuaExecutor::luaAddAFunc("lOnClick", luaLLeftOnClick);
+    
+    // LIN012
+    LuaExecutor::luaAddAFunc("rOnClick", luaLRightOnClick);
+    
+    // LIN013
+    LuaExecutor::luaAddAFunc("keyDown", luaLKeyDown);
+    
+    // LIN014
+    LuaExecutor::luaAddAFunc("keyUp", luaLKeyUp);
+
 
 }
