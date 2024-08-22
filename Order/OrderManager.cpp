@@ -40,8 +40,11 @@ void OrderManager::addServerOrders() {
 		orderIds.push_back(orderDoc["orderId"].GetString());
 	}
 
+	const rapidjson::Value& orders = httpResultDoc["orders"];
+
+
 	for (const auto& order : httpResultDoc["orders"].GetArray()) {
-		const char* httpOrderId = order["orderId"].GetString();
+		const char* httpOrderId = order["orderID"].GetString();
 
 		bool isHas = false;
 		for (const auto& t : orderIds) {
@@ -68,38 +71,39 @@ void OrderManager::addServerOrders() {
 			writer.String(httpOrderId);
 
 			// orderName
-			writer.Key("orderName");
-			writer.String(order["orderName"].GetString());
+			writer.Key("orderServiceName");
+			writer.String(order["orderService"]["orderServiceName"].GetString());
 
 			// createTime
 			writer.Key("createTime");
-			writer.String(order["createTime"].GetString());
+			writer.String(order["createdTime"].GetString());
 
 			// orderParas
 			writer.Key("orderParas");
 			writer.StartArray();
-			for (const auto& para : order["orderParas"].GetObj()) {
+			for (const auto& para : order["orderServiceResources"].GetObj()) {
+				
+				
+
 				writer.StartObject();
-				writer.Key(para.name.GetString());
+				writer.Key(para.value["orderServiceResource"]["orderServiceResourceName"].GetString());
 				if (para.value.IsInt() == true) {
-					writer.Int(para.value.GetInt());
+					writer.Int(para.value["resourceIntValue"].GetInt());
 				}
 				if (para.value.IsDouble() == true) {
-					writer.Double(para.value.GetDouble());
+					writer.Double(para.value["resourceDoubleValue"].GetDouble());
 				}
 				if (para.value.IsString() == true) {
-					writer.String(para.value.GetString());
+					writer.String(para.value["resourceStringValue"].GetString());
 				}
-				if (para.value.IsBool() == true) {
-					writer.Bool(para.value.GetBool());
-				}
+				
 				writer.EndObject();
 			}
 			writer.EndArray();
 
 			// script
 			writer.Key("script");
-			writer.String(order["script"].GetString());
+			writer.String(order["orderService"]["orderServiceWorkScript"].GetString());
 
 			writer.EndObject();
 
@@ -132,17 +136,21 @@ void OrderManager::pullServerOrders() {
 	}
 
 	if (this->jwt != nullptr) {
+		std::string authorization_header = "Bearer " + std::string(this->jwt);
+		//std::string authorization_header = std::string(this->jwt);
+		// 设置默认的请求头部，包含JWT令牌
 		client.set_default_headers({
-		{"Authorization", this->jwt} // 设置默认的请求头部，包含 JWT 令牌
-			});
+			{"Authorization", authorization_header}
+		});
 	}
 
 	//====生产地址====
 	//auto res = client.Get("/orders");
+	httplib::Result res = client.Get("/api/v1/Account/Test2");
 
 	//====测试地址====
     //====/mock/00b44ac4-9575-4322-bcc8-583a9fcac8ce/orders====
-	httplib::Result res = client.Get("/mock/00b44ac4-9575-4322-bcc8-583a9fcac8ce/orders");
+	//httplib::Result res = client.Get("/mock/00b44ac4-9575-4322-bcc8-583a9fcac8ce/orders");
 	//==================
 	if (res) {
 
@@ -155,7 +163,7 @@ void OrderManager::pullServerOrders() {
 		}
 		return;
 	}
-
+	
 	if (res->status == 401) {
 		this->login();
 		return;
@@ -309,7 +317,7 @@ void OrderManager::login() {
 
 	// 构建 POST 请求的 JSON 数据
 	std::string postJson =
-		"{\"botAccount\" : " +
+		"{\"userName\" : " +
 		string(this->botAccount) +
 		"," +
 		"\"password\": \"" +
@@ -321,7 +329,11 @@ void OrderManager::login() {
 
 	//====测试地址====
 	//====/mock/00b44ac4-9575-4322-bcc8-583a9fcac8ce/login====
-	auto res = client.Post("/mock/00b44ac4-9575-4322-bcc8-583a9fcac8ce/login", postJson, "application/json");
+	//auto res = client.Post("/mock/00b44ac4-9575-4322-bcc8-583a9fcac8ce/login", postJson, "application/json");
+	//==================
+	//====生产地址====
+	auto res = client.Post("/api/v1/Account/Login", postJson, "application/json");
+	//
 	//==================
 	
 	if (res) {
@@ -340,9 +352,10 @@ void OrderManager::login() {
 	if (res && res->status == 200) {
 		Document doc;
 		doc.Parse(res->body.c_str());
-		string token = doc["token"].GetString() ;
+		string token = doc["Access_token"].GetString() ;
 		token = token + "\0";
-		this->jwt = new char[strlen(token.c_str()) + 4];
+		this->jwt = new char[strlen(token.c_str()) + 1];
+		memset(this->jwt, 0x00, strlen(token.c_str()) + 1);
 		//int q = token.length() + 2;
 		strcpy_s(this->jwt, strlen(token.c_str()) + 1, token.c_str());
 	}
