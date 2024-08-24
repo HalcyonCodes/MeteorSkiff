@@ -134,20 +134,30 @@ void OrderManager::pullServerOrders() {
 	if (this->jwt == nullptr) {
 		this->login();
 	}
+	httplib::Headers headers;
 
 	if (this->jwt != nullptr) {
-		std::string authorization_header = "Bearer " + std::string(this->jwt);
+		std::string authorizationHeader = "Bearer " + std::string(this->jwt);
 		//std::string authorization_header = std::string(this->jwt);
 		// 设置默认的请求头部，包含JWT令牌
-		client.set_default_headers({
-			{"Authorization", authorization_header}
-		});
+		//client.set_default_headers({
+		//	{"Authorization", authorization_header}
+		//});
+		headers = {
+		{"Authorization", authorizationHeader},
+		};
 	}
 
+	
+
+	
 	//====生产地址====
 	//auto res = client.Get("/orders");
-	httplib::Result res = client.Get("/api/v1/Account/Test2");
 
+	httplib::Result res = client.Get("/api/v1/Order/GetOrder", headers);
+	//httplib::Result res = client.Post("/api/v1/Account/PostTest", headers);
+	
+	
 	//====测试地址====
     //====/mock/00b44ac4-9575-4322-bcc8-583a9fcac8ce/orders====
 	//httplib::Result res = client.Get("/mock/00b44ac4-9575-4322-bcc8-583a9fcac8ce/orders");
@@ -353,7 +363,7 @@ void OrderManager::login() {
 		Document doc;
 		doc.Parse(res->body.c_str());
 		string token = doc["Access_token"].GetString() ;
-		token = token + "\0";
+		//token = token + "\0";
 		this->jwt = new char[strlen(token.c_str()) + 1];
 		memset(this->jwt, 0x00, strlen(token.c_str()) + 1);
 		//int q = token.length() + 2;
