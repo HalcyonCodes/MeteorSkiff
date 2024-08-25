@@ -42,9 +42,11 @@ void OrderManager::addServerOrders() {
 
 	const rapidjson::Value& orders = httpResultDoc["orders"];
 
+	//const char* test = orders["orderID"].GetString();
 
-	for (const auto& order : httpResultDoc["orders"].GetArray()) {
-		const char* httpOrderId = order["orderID"].GetString();
+	//for (const auto& order : httpResultDoc["orders"].GetArray()) {
+	
+		const char* httpOrderId = orders["orderID"].GetString();
 
 		bool isHas = false;
 		for (const auto& t : orderIds) {
@@ -54,7 +56,6 @@ void OrderManager::addServerOrders() {
 			if (isHas == true) {
 				break;
 			}
-			
 		}
 
 		if (isHas == true) {
@@ -72,30 +73,29 @@ void OrderManager::addServerOrders() {
 
 			// orderName
 			writer.Key("orderServiceName");
-			writer.String(order["orderService"]["orderServiceName"].GetString());
+			writer.String(orders["orderService"]["orderServiceName"].GetString());
 
 			// createTime
 			writer.Key("createTime");
-			writer.String(order["createdTime"].GetString());
+			writer.String(orders["createdTime"].GetString());
 
 			// orderParas
 			writer.Key("orderParas");
 			writer.StartArray();
-			for (const auto& para : order["orderServiceResources"].GetObj()) {
+			for (const auto& para : orders["orderServiceResources"].GetArray()) {
 				
 				
 
 				writer.StartObject();
-				writer.Key(para.value["orderServiceResource"]["orderServiceResourceName"].GetString());
-				if (para.value.IsInt() == true) {
-					writer.Int(para.value["resourceIntValue"].GetInt());
-				}
-				if (para.value.IsDouble() == true) {
-					writer.Double(para.value["resourceDoubleValue"].GetDouble());
-				}
-				if (para.value.IsString() == true) {
-					writer.String(para.value["resourceStringValue"].GetString());
-				}
+
+				const char* baseKey = para["orderServiceResource"]["orderServiceResourceName"].GetString();
+				writer.Key((string(baseKey) + "IntVal").c_str());
+				writer.Int(para["resourceIntValue"].GetInt());
+				writer.Key((string(baseKey) + "DoubleVal").c_str());
+				writer.Double(para["resourceDoubleValue"].GetDouble());
+				
+				writer.Key((string(baseKey) + "StringVal").c_str());
+				writer.String(para["resourceStringValue"].GetString());
 				
 				writer.EndObject();
 			}
@@ -103,7 +103,7 @@ void OrderManager::addServerOrders() {
 
 			// script
 			writer.Key("script");
-			writer.String(order["orderService"]["orderServiceWorkScript"].GetString());
+			writer.String(orders["orderService"]["orderServiceWorkScript"]["orderServiceScriptName"].GetString());
 
 			writer.EndObject();
 
@@ -114,7 +114,7 @@ void OrderManager::addServerOrders() {
 			this->orders.push_back(newOrderChar);
 
 		}
-	}
+	//}
 	return;
 }
 
