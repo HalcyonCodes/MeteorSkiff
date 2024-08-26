@@ -15,7 +15,7 @@ string msgOrderTest(OrderManager* orderManager);
 string msgPopServerOrder(OrderManager* orderManager);
 
 //====or002 msgSendOrderStatus====
-void msgSendOrderStatus(OrderManager* orderManager, string orderId, string orderStatus);
+void msgSendOrderStatus(OrderManager* orderManager, string orderId, int orderStatus);
 
 //====or003 msgOrderManagerInit====
 void msgOrderManagerInit(OrderManager* orderManager);

@@ -80,11 +80,11 @@ int MeteorSkiffBot::botRun() {
 
 			//4.发送脚本完成状态
 
-			string status;
+			int status;
 			Document doc;
 			doc.Parse(targetOrder.c_str());
 			string orderId = doc["orderId"].GetString();
-			status = "complete";
+			status = 1;
 			msgSendOrderStatus(orderManager, orderId, status);
 
 			//7.清理lua执行器

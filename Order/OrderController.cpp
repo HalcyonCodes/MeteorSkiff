@@ -34,7 +34,7 @@ string msgPopServerOrder(OrderManager* pOrderManager) {
 }
 
 //====or002 sendOrderStatus====
-void msgSendOrderStatus(OrderManager* pOrderManager, string orderId, string orderStatus) {
+void msgSendOrderStatus(OrderManager* pOrderManager, string orderId, int orderStatus) {
 	//MsgLoadPic msgInterface;
 	MsgSendOrderStatus  msgInterface;
 	msgInterface.msgOrderManager = pOrderManager;

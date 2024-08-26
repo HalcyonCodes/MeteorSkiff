@@ -121,7 +121,9 @@ char* ActionManager::getScriptPara(const char* json) {
     // 检查 "orderParas" 是否存在并且是一个数组
     if (doc.HasMember("orderParas") && doc["orderParas"].IsArray()) {
         const auto& orderParas = doc["orderParas"].GetArray();
-        //dbgPrint("Order Paras Array Size: %zu\n", orderParas.Size());
+
+        dbgPrint("Order Paras Array Size: %zu\n", orderParas.Size());
+
         // 遍历 "orderParas" 数组
         for (const auto& para : orderParas) {
             if (para.IsObject()) {
@@ -152,6 +154,7 @@ char* ActionManager::getScriptPara(const char* json) {
 
     strcpy_s(charPtr, len + 1, luaCommond.c_str());
     charPtr[len] = '\0';
+    dbgPrint("para : %s", charPtr);
     return charPtr;
 
 }

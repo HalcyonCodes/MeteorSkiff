@@ -113,6 +113,8 @@ void OrderManager::addServerOrders() {
 			strcpy_s(newOrderChar, newOrder.length() + 1, newOrder.c_str());
 			this->orders.push_back(newOrderChar);
 
+			//设置服务器端订单为等待
+			this->sendOrderStatus(httpOrderId, 0);
 		}
 	//}
 	return;
@@ -183,6 +185,7 @@ void OrderManager::pullServerOrders() {
 		size_t bodyLenght = res->body.length();
 		this->httpResultBody = new char[bodyLenght + 1];
 		strcpy_s(this->httpResultBody, bodyLenght + 1, res->body.c_str());
+		
 		return;
 	}
 	return;
@@ -207,9 +210,9 @@ string OrderManager::popServerOrder() {
 		string status;
 		Document doc;
 		doc.Parse(order);
-		string orderId = doc["orderId"].GetString();
-		status = "working";
-		this->sendOrderStatus(orderId.c_str(), status.c_str());
+		//string orderId = doc["orderId"].GetString();
+		//status = "working";
+		//this->sendOrderStatus(orderId.c_str(), status.c_str());
 
 		// 从列表中移除第一个订单
 		orders.pop_front();
@@ -229,7 +232,7 @@ string OrderManager::popServerOrder() {
 	}
 }
 
-int OrderManager::sendOrderStatus(const char* orderId, const char* status) {
+int OrderManager::sendOrderStatus(const char* orderId, int status) {
 
 	string http = string(this->serverIp);
 	string port = string(this->port);
@@ -240,18 +243,32 @@ int OrderManager::sendOrderStatus(const char* orderId, const char* status) {
 		});
 	// 构建 POST 请求的 JSON 数据
 	std::string postJson =
-		"{\"orderId\" : \"" +
+		"{\"orderID\" : \"" +
 		string(orderId) +
 		"\" , " +
 		"\"status\" : \"" +
-		string(status) +
+		std::to_string(status) +
 		"\"}";
-	client.set_default_headers({
-	 {"Authorization", this->jwt} // 设置默认的请求头部，包含 JWT 令牌
-	});
+
+	httplib::Headers headers;
+
+	if (this->jwt != nullptr) {
+		std::string authorizationHeader = "Bearer " + std::string(this->jwt);
+		//std::string authorization_header = std::string(this->jwt);
+		// 设置默认的请求头部，包含JWT令牌
+		//client.set_default_headers({
+		//	{"Authorization", authorization_header}
+		//});
+		headers = {
+		{"Authorization", authorizationHeader}
+		};
+	}
 
 	//auto res = client.Post("/setOrderStatus", postJson, "application/json");
-	auto res = client.Post("/mock/00b44ac4-9575-4322-bcc8-583a9fcac8ce/setOrderStatus", postJson, "application/json");
+	//auto res = client.Post("/mock/00b44ac4-9575-4322-bcc8-583a9fcac8ce/setOrderStatus", postJson, "application/json");
+	//====生产地址====
+	httplib::Result res = client.Post("/api/v1/Order/UpdateOrderStatus", headers, postJson, "application/json");
+
 
 	return res->status;
 }

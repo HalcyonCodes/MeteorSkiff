@@ -24,9 +24,10 @@ typedef struct OrderManager {
 	void init(); //读取配置文件，获取ip和端口
 	void addServerOrders(); //把json字符串解析成订单压入订单栈
 	string popServerOrder();  //从栈顶返回一个订单，并且从orders中删除那个被弹出的订单
+
 	void pullServerOrders(); //向服务器请求订单
 	void login(); //向服务器发送登录请求，获取jwt令牌
-	int sendOrderStatus(const char* orderId, const char* status); //另一个线程完成订单后,向服务器发送订单完成状态，通知服务器删除订单
+	int sendOrderStatus(const char* orderId, int status); //另一个线程完成订单后,向服务器发送订单完成状态，通知服务器删除订单
 
 }_OrderManager;
 

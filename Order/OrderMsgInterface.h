@@ -17,7 +17,7 @@ typedef struct MsgPopOrder {
 typedef struct MsgSendOrderStatus {
 	OrderManager* msgOrderManager = nullptr;
 	string orderId;
-	string orderStatus;
+	int orderStatus;
 	int result;
 }_MsgSendOrderStatus;
 

@@ -69,7 +69,7 @@ LRESULT CALLBACK orderProc(int code, WPARAM wParam, LPARAM lParam) {
 				//dbgPrint("addr-1:%p", msgInterface);
 				//----2.调用----
 				const char* orderId = msgInterface->orderId.c_str();
-				const char* orderStatus = msgInterface->orderStatus.c_str();
+				int orderStatus = msgInterface->orderStatus;
 				int result = msgInterface->msgOrderManager->sendOrderStatus(orderId, orderStatus);
 				//----3.处理----
 				msgInterface->result = result;
