@@ -58,6 +58,18 @@ typedef struct MsgInput {
 	int result;
 }_MsgInput;
 
+//==========
+//OR001-
+typedef struct MsgOrder {
+	int channelLevel;
+	int serviceID;
+	std::string targetID;
+	std::vector<int> resourceID;
+	std::vector<int> intVal;
+	std::vector<std::string> stringVal;
+	std::vector<double> doubleVal;
+	int result;
+} _MsgOrder;
 
 
 

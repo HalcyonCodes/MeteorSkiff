@@ -75,3 +75,11 @@ void msgOrderManagerLogin(OrderManager* pOrderManager) {
 	LRESULT result = SendMessageA(orderManagerHwnd, orderMsgCode, or006, (LPARAM)&msgInterface);
 	return;
 }
+
+//====or007 msgTerminalInit====
+void msgTerminalInit(OrderManager* pOrderManager) {
+	MsgOrderController msgInterface;
+	msgInterface.msgOrderManager = pOrderManager;
+	LRESULT result = SendMessageA(orderManagerHwnd, orderMsgCode, or007, (LPARAM)&msgInterface);
+	return;
+}

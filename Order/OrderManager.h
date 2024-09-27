@@ -21,6 +21,8 @@ typedef struct OrderManager {
 	char* serverResult; //服务器返回json字符串
 	char* jwt; //服务器发放的令牌
 	char* httpResultBody; //http请求后存放body的字符串
+    char* terminalID; //获取终端的id
+    char* terminalIP; //终端ip
 	void init(); //读取配置文件，获取ip和端口
 	void addServerOrders(); //把json字符串解析成订单压入订单栈
 	string popServerOrder();  //从栈顶返回一个订单，并且从orders中删除那个被弹出的订单
@@ -28,12 +30,14 @@ typedef struct OrderManager {
 	void pullServerOrders(); //向服务器请求订单
 	void login(); //向服务器发送登录请求，获取jwt令牌
 	int sendOrderStatus(const char* orderId, int status); //另一个线程完成订单后,向服务器发送订单完成状态，通知服务器删除订单
-
+    int terminalInit(); //初始化终端
+    //向服务器创建订单
+    
 }_OrderManager;
 
 extern OrderManager* orderManager;
-
-
+extern char* terminalID;
+extern char* JWT;
 
 /* json 格式：
 {

@@ -28,6 +28,7 @@ void MeteorSkiffBot::botInit() {
 	//luaExecutor->luaInit(); //创建lua环境
 	//luaExecutor->luaAddAllFunc();  //添加所有lua函数以便注册
 	//luaExecutor->luaRegistFuncs();  //注册所有lua函数
+	
 
 }
 
@@ -41,6 +42,8 @@ int MeteorSkiffBot::botRun() {
 		//1.检查OrderManager里有没有订单
 		string targetOrder = msgPopServerOrder(orderManager); //通过sendmessage方法向order线程发送hook消息
 	    
+		//测试
+		
 		
 		if (targetOrder.length() == 0) {
 			//没有订单时不工作

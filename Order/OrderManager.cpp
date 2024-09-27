@@ -12,6 +12,15 @@
 #include "SetWindowHookOrder.h"
 #include "GetHwndByPID.h"
 
+
+#include <winsock2.h>
+#include <iphlpapi.h>
+#include <iostream>
+
+#pragma comment(lib, "iphlpapi.lib")
+#pragma comment(lib, "Ws2_32.lib")
+
+
 using namespace std;
 using namespace rapidjson;
 
@@ -21,6 +30,8 @@ using namespace rapidjson;
 
 
 OrderManager* orderManager = nullptr;
+char* terminalID = nullptr;
+char* JWT = nullptr;
 
 void OrderManager::addServerOrders() {
 	Document orderDoc;
@@ -154,15 +165,15 @@ void OrderManager::pullServerOrders() {
 
 	
 	//====生产地址====
-	//auto res = client.Get("/orders");
+	
 
-	httplib::Result res = client.Get("/api/v1/Order/GetOrder", headers);
+	//httplib::Result res = client.Get("/api/v1/Order/GetOrder", headers);
 	//httplib::Result res = client.Post("/api/v1/Account/PostTest", headers);
 	
 	
 	//====测试地址====
     //====/mock/00b44ac4-9575-4322-bcc8-583a9fcac8ce/orders====
-	//httplib::Result res = client.Get("/mock/00b44ac4-9575-4322-bcc8-583a9fcac8ce/orders");
+	httplib::Result res = client.Get("/mock/00b44ac4-9575-4322-bcc8-583a9fcac8ce/orders");
 	//==================
 	if (res) {
 
@@ -324,6 +335,51 @@ void OrderManager::init() {
 	strcpy_s(this->botPwd, strlen(charPassword) + 1, charPassword);
 
 	//设置共享内存通道
+	
+	//设置本机ip
+	WSADATA wsaData;
+	int result = WSAStartup(MAKEWORD(2, 2), &wsaData);
+	if (result != 0) {
+		std::cerr << "WSAStartup failed: " << result << std::endl;
+		//return 1;
+	}
+
+	ULONG outBufLen = sizeof(IP_ADAPTER_ADDRESSES);
+	PIP_ADAPTER_ADDRESSES pAddresses = (IP_ADAPTER_ADDRESSES*)malloc(outBufLen);
+
+	// 获取适配器地址
+	result = GetAdaptersAddresses(AF_INET, 0, NULL, pAddresses, &outBufLen);
+	if (result == ERROR_BUFFER_OVERFLOW) {
+		pAddresses = (IP_ADAPTER_ADDRESSES*)realloc(pAddresses, outBufLen);
+		result = GetAdaptersAddresses(AF_INET, 0, NULL, pAddresses, &outBufLen);
+	}
+	char ipStr[INET_ADDRSTRLEN];
+	if (result == NO_ERROR) {
+		// 遍历所有适配器
+		for (PIP_ADAPTER_ADDRESSES pCurrAddresses = pAddresses; pCurrAddresses != NULL; pCurrAddresses = pCurrAddresses->Next) {
+			if (pCurrAddresses->OperStatus == IfOperStatusUp) { // 检查适配器是否启用
+
+				// 遍历所有地址
+				for (PIP_ADAPTER_UNICAST_ADDRESS pUnicast = pCurrAddresses->FirstUnicastAddress; pUnicast != NULL; pUnicast = pUnicast->Next) {
+					struct sockaddr_in* ipv4 = reinterpret_cast<struct sockaddr_in*>(pUnicast->Address.lpSockaddr);
+					//char ipStr[INET_ADDRSTRLEN];
+					inet_ntop(AF_INET, &ipv4->sin_addr, ipStr, INET_ADDRSTRLEN);
+					std::cout << "IP Address: " << ipStr << std::endl;
+					if (string(ipStr) != "127.0.0.1") {
+						this->terminalIP = new char(strlen(ipStr) + 1);
+						strcpy_s(this->terminalIP, strlen(ipStr) + 1, ipStr);
+						break;
+					}
+
+				}
+			}
+		}
+	}
+	
+	
+	free(pAddresses);
+	WSACleanup();
+	
 
 	return;
 }
@@ -386,5 +442,59 @@ void OrderManager::login() {
 		//int q = token.length() + 2;
 		strcpy_s(this->jwt, strlen(token.c_str()) + 1, token.c_str());
 	}
+	JWT = this->jwt;
 	return;
 }
+
+
+int OrderManager::terminalInit() {
+	string http = string(this->serverIp);
+	string port = string(this->port);
+
+
+
+	httplib::Client client(http + ":" + port);
+	client.set_default_headers({
+		{"Authorization", this->jwt}
+		});
+
+	httplib::Headers headers;
+
+	if (this->jwt != nullptr) {
+		std::string authorizationHeader = "Bearer " + std::string(this->jwt);
+		//std::string authorization_header = std::string(this->jwt);
+		// 设置默认的请求头部，包含JWT令牌
+		//client.set_default_headers({
+		//	{"Authorization", authorization_header}
+		//});
+		headers = {
+		{"Authorization", authorizationHeader}
+		};
+	}
+	//
+	//
+
+	std::string postJson =
+		"{\"terminalName\" : " +
+		string(this->botAccount) +
+		"," +
+		"\"terminalIP\": \"" +
+		string(this->terminalIP) + "\"" +
+		","+
+		"\"terminalDesc\": \"a terminal.\""
+		"}";
+	
+	//====生产地址====
+	httplib::Result res = client.Post("/api/v1/Termianl/TerminalInit", headers, postJson, "application/json");
+
+	this->terminalID = new char[strlen(res->body.c_str()) + 1];
+	strcpy_s(this->terminalID, strlen(res->body.c_str()) + 1, res->body.c_str());
+	terminalID = this->terminalID;
+
+	return res->status;
+}
+
+
+
+
+

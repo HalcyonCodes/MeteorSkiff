@@ -1,6 +1,7 @@
 
 #include <Windows.h>
 #include "Skill.h"
+#include <OrderSkill.h>
 using namespace std;
 #using <System.Drawing.dll>
 using namespace System::Drawing;
@@ -222,5 +223,20 @@ void testSkill() {
 
      //InputAction 015
      //inputAction.keyPress(65);
+     //======================================
+     OrderSkill orderSkill;
+     
+     //OrderSkill 001
+     int channelLevel = 1;
+     int serviceID = 1001;
+     std::string targetID = "Target123";
 
+     std::vector<int> resourceID = { 101, 102, 103 }; // 资源 ID 列表
+     std::vector<int> intVal = { 1, 2, 3 }; // 整数值列表
+     std::vector<std::string> stringVal = { "one", "two", "three" }; // 字符串值列表
+     std::vector<double> doubleVal = { 1.1, 2.2, 3.3 }; // 双精度浮点数值列表
+
+     // 调用 createOrder 方法
+     int result = orderSkill.createOrder(channelLevel, serviceID, targetID, resourceID, intVal, stringVal, doubleVal);
+     
 }

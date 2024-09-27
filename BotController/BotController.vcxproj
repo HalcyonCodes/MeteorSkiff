@@ -154,6 +154,7 @@
     <ClInclude Include="GetScreenController.h" />
     <ClInclude Include="InputActionController.h" />
     <ClInclude Include="MsgInterface.h" />
+    <ClInclude Include="OrderSkillController.h" />
     <ClInclude Include="pch.h" />
     <ClInclude Include="SetWindowHook.h" />
     <ClInclude Include="Tip.h" />
@@ -164,6 +165,7 @@
     <ClCompile Include="BotSkills.cpp" />
     <ClCompile Include="GetScreenController.cpp" />
     <ClCompile Include="InputActionController.cpp" />
+    <ClCompile Include="OrderSkillController.cpp" />
     <ClCompile Include="pch.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>

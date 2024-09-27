@@ -13,6 +13,9 @@
 void OrderManagerBot::botInit() {
 	//1.≥ı ºªØ
 	msgOrderManagerInit(orderManager);
+	msgOrderManagerLogin(orderManager);
+	msgTerminalInit(orderManager);
+
 }
 
 int OrderManagerBot::botRun() {

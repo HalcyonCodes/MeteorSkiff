@@ -8,6 +8,7 @@
 #include "BotSkills.h"
 #include "SetWindowHook.h"
 #include "InputAction.h"
+#include "OrderSkill.h"
 
 
 
@@ -480,6 +481,29 @@ LRESULT CALLBACK actionsProc(int code, WPARAM wParam, LPARAM lParam) {
 				//----3.处理----
 				msgInterface->result = result;
 				delete(inputAction);
+				break;
+			}
+			//=====
+			case or001: {
+				//or001
+				//----1.处理参数----
+				MsgOrder* msgInterface = static_cast<MsgOrder*>((void*)(lpArg->lParam));
+
+				//----2.调用----
+				
+				OrderSkill* orderSkill = new OrderSkill();
+				int result = orderSkill->createOrder(
+					msgInterface->channelLevel,
+					msgInterface->serviceID,
+					msgInterface->targetID,
+					msgInterface->resourceID,
+					msgInterface->intVal,
+					msgInterface->stringVal,
+					msgInterface->doubleVal
+				);
+				//----3.处理----
+				msgInterface->result = result;
+				delete(orderSkill);
 				break;
 			}
 

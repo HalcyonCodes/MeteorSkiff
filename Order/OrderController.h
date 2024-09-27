@@ -28,4 +28,7 @@ void msgOrderManagerPullServerOrders(OrderManager* orderManager);
 
 //====or006 msgOrderManagerLogin====
 void msgOrderManagerLogin(OrderManager* orderManager);
+
+//====or006 msgTerminalInit====
+void msgTerminalInit(OrderManager* orderManager);
 	

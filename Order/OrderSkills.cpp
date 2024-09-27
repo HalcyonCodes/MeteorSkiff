@@ -127,9 +127,23 @@ LRESULT CALLBACK orderProc(int code, WPARAM wParam, LPARAM lParam) {
 				//msgInterface->result = result;
 				break;
 			}
+			//====or 007 terminalInit====
+			case or007: {
+				//or 006
+				//----1.处理参数----
+				MsgOrderController* msgInterface = static_cast<MsgOrderController*>((void*)(lpArg->lParam));
+				//memset(msgInterface->name, 0x00, 512);
+				//dbgPrint("addr-1:%p", msgInterface);
+				//----2.调用----
+				msgInterface->msgOrderManager->terminalInit();
+				//----3.处理----
+				//msgInterface->result = result;
+				break;
+			}
 
 			return 1;
 			}
+
 		}
 		return CallNextHookEx(qHGame, code, wParam, lParam);
 	}

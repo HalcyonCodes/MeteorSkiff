@@ -36,6 +36,9 @@
     <ClInclude Include="InputAction.h">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="OrderSkill.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Skill.cpp">
@@ -51,6 +54,9 @@
       <Filter>源文件</Filter>
     </ClCompile>
     <ClCompile Include="InputAction.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="OrderSkill.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>
