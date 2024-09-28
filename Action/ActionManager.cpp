@@ -58,7 +58,7 @@ int ActionManager::loadAllScript() {
             std::ifstream file(fullPath);
             
             if (!file.is_open()) {
-                dbgPrint("错误：无法打开文件：%s", fullPath.c_str());
+               // dbgPrint("错误：无法打开文件：%s", fullPath.c_str());
                 continue;
             }
 
@@ -97,10 +97,18 @@ char* ActionManager::getScript(const char* json) {
     Document doc;
     doc.Parse(json);
     if (doc.HasParseError()) {
-        dbgPrint("Para Parse Error");
+        //dbgPrint("Para Parse Error");
         this->script = nullptr;
     }
-    char* result = scripts[doc["script"].GetString()];
+    string name = doc["script"].GetString();
+    size_t dotPos = name.find_last_of(".");
+    
+        // 截取从开始到点之前的字符串，并赋值回 scriptName
+    string newName = name.substr(0, dotPos);
+    
+    //dbgPrint("sssss : %s", newName.c_str());
+
+    char* result = scripts[newName];
 
     return result;
 }
@@ -110,7 +118,7 @@ char* ActionManager::getScriptPara(const char* json) {
 
     doc.Parse(json);
     if (doc.HasParseError()) {
-        dbgPrint("Para Parse Error");
+       // dbgPrint("Para Parse Error");
         return nullptr;
     }
     std::list<const char*> keyList;
@@ -122,7 +130,7 @@ char* ActionManager::getScriptPara(const char* json) {
     if (doc.HasMember("orderParas") && doc["orderParas"].IsArray()) {
         const auto& orderParas = doc["orderParas"].GetArray();
 
-        dbgPrint("Order Paras Array Size: %zu\n", orderParas.Size());
+        //dbgPrint("Order Paras Array Size: %zu\n", orderParas.Size());
 
         // 遍历 "orderParas" 数组
         for (const auto& para : orderParas) {
@@ -154,7 +162,7 @@ char* ActionManager::getScriptPara(const char* json) {
 
     strcpy_s(charPtr, len + 1, luaCommond.c_str());
     charPtr[len] = '\0';
-    dbgPrint("para : %s", charPtr);
+    //dbgPrint("para : %s", charPtr);
     return charPtr;
 
 }

@@ -3,7 +3,7 @@
 #include "FindPicLuaFuncs.h"
 #include "ToolLuaFuncs.h"
 #include "InputLuaFuncs.h"
-#include "OrderSkillLuaFuncs.h"
+
 
 
 void LuaExecutor::luaAddAllFunc() {

@@ -68,5 +68,8 @@
     <ClCompile Include="ini.c">
       <Filter>源文件</Filter>
     </ClCompile>
+    <ClCompile Include="OrderSkills.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>
