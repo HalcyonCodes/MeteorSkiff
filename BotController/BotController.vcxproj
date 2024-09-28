@@ -165,7 +165,6 @@
     <ClCompile Include="BotSkills.cpp" />
     <ClCompile Include="GetScreenController.cpp" />
     <ClCompile Include="InputActionController.cpp" />
-    <ClCompile Include="OrderSkillController.cpp" />
     <ClCompile Include="pch.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>

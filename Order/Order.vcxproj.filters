@@ -59,9 +59,6 @@
     <ClCompile Include="OrderController.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
-    <ClCompile Include="OrderSkills.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
     <ClCompile Include="SetWindowHookOrder.cpp">
       <Filter>源文件</Filter>
     </ClCompile>

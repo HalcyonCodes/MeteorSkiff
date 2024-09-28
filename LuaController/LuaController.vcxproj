@@ -149,7 +149,6 @@
     <ClInclude Include="framework.h" />
     <ClInclude Include="InputLuaFuncs.h" />
     <ClInclude Include="LuaExecutor.h" />
-    <ClInclude Include="OrderSkillLuaFuncs.h" />
     <ClInclude Include="pch.h" />
     <ClInclude Include="ToolLuaFuncs.h" />
   </ItemGroup>
@@ -159,7 +158,6 @@
     <ClCompile Include="LuaAddFuncs.cpp" />
     <ClCompile Include="LuaController.cpp" />
     <ClCompile Include="LuaExecutor.cpp" />
-    <ClCompile Include="OrderSkillLuaFuncs.cpp" />
     <ClCompile Include="pch.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>

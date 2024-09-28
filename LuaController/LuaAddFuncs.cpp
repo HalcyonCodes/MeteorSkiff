@@ -96,7 +96,7 @@ void LuaExecutor::luaAddAllFunc() {
     LuaExecutor::luaAddAFunc("keyUp", luaLKeyUp);
 
     // LOR001
-    LuaExecutor::luaAddAFunc("createOrder", luaLCreateOrder);
+    //LuaExecutor::luaAddAFunc("createOrder", luaLCreateOrder);
 
 
 }

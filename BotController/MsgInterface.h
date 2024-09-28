@@ -1,6 +1,7 @@
 #pragma once
 #include "Windows.h"
-
+#include <vector>
+#include <string>
 
 //这里存放msg的返回值
 

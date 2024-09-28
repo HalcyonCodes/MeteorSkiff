@@ -27,7 +27,7 @@ int OrderSkill::createOrder(int channleLevel, int serviceID, string targetID, ve
     INIReader reader(configPath);
     if (reader.ParseError() < 0) {
         dbgPrint("Error: Unable to load config.ini");
-        return;
+        return -1;
     }
 
     string serverIp = reader.Get("server", "ip", "127.0.0.1");
@@ -153,5 +153,5 @@ int OrderSkill::createOrder(int channleLevel, int serviceID, string targetID, ve
     httplib::Result res = client.Post("/api/v1/Order/CreateOrder", headers, strBuf.GetString(), "application/json");
     return res->status;
 
-
+   
 }

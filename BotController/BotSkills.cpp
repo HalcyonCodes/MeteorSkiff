@@ -484,7 +484,7 @@ LRESULT CALLBACK actionsProc(int code, WPARAM wParam, LPARAM lParam) {
 				break;
 			}
 			//=====
-			case or001: {
+			/*case or001: {
 				//or001
 				//----1.处理参数----
 				MsgOrder* msgInterface = static_cast<MsgOrder*>((void*)(lpArg->lParam));
@@ -505,7 +505,7 @@ LRESULT CALLBACK actionsProc(int code, WPARAM wParam, LPARAM lParam) {
 				msgInterface->result = result;
 				delete(orderSkill);
 				break;
-			}
+			}*/
 
 
 
