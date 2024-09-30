@@ -83,3 +83,16 @@ void msgTerminalInit(OrderManager* pOrderManager) {
 	LRESULT result = SendMessageA(orderManagerHwnd, orderMsgCode, or007, (LPARAM)&msgInterface);
 	return;
 }
+
+//====or008 msgHttpPost
+int msgHttpPost(OrderManager* orderManager, string ip, string port, string http, string data){
+	MsgHttpPost msgInterface;
+	msgInterface.msgOrderManager = orderManager;
+	msgInterface.ip = ip;
+	msgInterface.port = port;
+	msgInterface.http = http;
+	msgInterface.data = data;
+	LRESULT result = SendMessageA(orderManagerHwnd, orderMsgCode, or008, (LPARAM)&msgInterface);
+	return msgInterface.result;
+}
+

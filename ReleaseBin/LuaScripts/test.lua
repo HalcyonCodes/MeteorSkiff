@@ -2,7 +2,7 @@
 --注意：所有中文字符必须在utf-8文件编辑后，
 --在txt编辑器里另存为ansi编码，才能在内存里读取到中文字符
 
-dbgPrint("����");
+--dbgPrint("����");
 
 --loadBmp("C:\\Users\\reddock\\Desktop\\BMPTEST\\testFincPic1.bmp|C:\\Users\\reddock\\Desktop\\BMPTEST\\testFincPic2.bmp");
 
@@ -113,7 +113,7 @@ end
 
 ----InputAction ??-----
 --InputAction 001 inputInit
-inputInit("����ץץ��������2014.05.16868");
+--inputInit("����ץץ��������2014.05.16868");
 
 --InputAction 002 lClickDown
 --lClickDown(0);
@@ -154,3 +154,13 @@ inputInit("����ץץ��������2014.05.16868");
 --InputAction 014 keyUp
 --keyUp(65);
 
+-----------Order  ----------
+--order 008 httpPost
+--r = 'localhost';
+--t = '5036';
+--q = '/api/v1/Account/PostTest';
+--w = '';
+--dbgPrint("����");
+--httpPost(r, t, q, w)
+--dbgPrint("66666666");
+dbgPrint("����");

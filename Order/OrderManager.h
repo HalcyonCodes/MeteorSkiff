@@ -31,7 +31,7 @@ typedef struct OrderManager {
 	void login(); //向服务器发送登录请求，获取jwt令牌
 	int sendOrderStatus(const char* orderId, int status); //另一个线程完成订单后,向服务器发送订单完成状态，通知服务器删除订单
     int terminalInit(); //初始化终端
-    //向服务器创建订单
+    int httpPost(string ip, string port, string http, string data); //发送post请求
     
 }_OrderManager;
 

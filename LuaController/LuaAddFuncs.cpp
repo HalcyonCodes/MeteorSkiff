@@ -3,7 +3,7 @@
 #include "FindPicLuaFuncs.h"
 #include "ToolLuaFuncs.h"
 #include "InputLuaFuncs.h"
-
+#include "OrderLuaFuncs.h"
 
 
 void LuaExecutor::luaAddAllFunc() {
@@ -95,8 +95,9 @@ void LuaExecutor::luaAddAllFunc() {
     // LIN014
     LuaExecutor::luaAddAFunc("keyUp", luaLKeyUp);
 
-    // LOR001
-    //LuaExecutor::luaAddAFunc("createOrder", luaLCreateOrder);
+    //=====order Ä£¿é=====
+    //LOR001
+    LuaExecutor::luaAddAFunc("httpPost", luaLHttpPost);
 
 
 }

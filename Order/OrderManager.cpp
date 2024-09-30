@@ -445,14 +445,43 @@ int OrderManager::terminalInit() {
 	//====生产地址====
 	httplib::Result res = client.Post("/api/v1/Termianl/TerminalInit", headers, postJson, "application/json");
 
-	this->terminalID = new char[strlen(res->body.c_str()) + 1];
-	strcpy_s(this->terminalID, strlen(res->body.c_str()) + 1, res->body.c_str());
+	string temp = string(res->body.c_str());
+
+	temp.erase(0, 1); // 去掉第一个字符（即第一个双引号）
+	temp.erase(temp.size() - 1);
+	this->terminalID = new char[strlen(temp.c_str()) + 1];
+	strcpy_s(this->terminalID, strlen(temp.c_str()) + 1, temp.c_str());
 	terminalID = this->terminalID;
 
 	return res->status;
 }
 
 
+int OrderManager::httpPost(string ip, string port, string http, string data) {
 
+
+	httplib::Client client(ip + ":" + port);
+	client.set_default_headers({
+		{"Authorization", this->jwt}
+		});
+
+	httplib::Headers headers;
+
+	if (this->jwt != nullptr) {
+		std::string authorizationHeader = "Bearer " + std::string(this->jwt);
+		//std::string authorization_header = std::string(this->jwt);
+		// 设置默认的请求头部，包含JWT令牌
+		//client.set_default_headers({
+		//	{"Authorization", authorization_header}
+		//});
+		headers = {
+		{"Authorization", authorizationHeader}
+		};
+	}
+	std::string postJson = data;
+
+	httplib::Result res = client.Post(http, headers, postJson, "application/json");
+	return res->status;
+}
 
 

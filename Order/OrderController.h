@@ -29,6 +29,8 @@ void msgOrderManagerPullServerOrders(OrderManager* orderManager);
 //====or006 msgOrderManagerLogin====
 void msgOrderManagerLogin(OrderManager* orderManager);
 
-//====or006 msgTerminalInit====
+//====or007 msgTerminalInit====
 void msgTerminalInit(OrderManager* orderManager);
-	
+
+//====or008 =====
+int msgHttpPost(OrderManager* orderManager, string ip, string port, string http, string data);

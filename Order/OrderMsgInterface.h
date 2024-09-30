@@ -27,3 +27,12 @@ typedef struct MsgOrderController {
 
 }_MsgOrderController;
 
+//or003 httpPost
+typedef struct MsgHttpPost {
+	OrderManager* msgOrderManager = nullptr;
+	string ip;
+	string port;
+	string http;
+	string data;
+	int result;
+}_MsgHttpPost;

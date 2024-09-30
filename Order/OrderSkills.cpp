@@ -140,6 +140,19 @@ LRESULT CALLBACK orderProc(int code, WPARAM wParam, LPARAM lParam) {
 				//msgInterface->result = result;
 				break;
 			}
+			//====or 008 httpPost====
+			case or008: {
+				//or 008
+				//----1.处理参数----
+				MsgHttpPost* msgInterface = static_cast<MsgHttpPost*>((void*)(lpArg->lParam));
+				//memset(msgInterface->name, 0x00, 512);
+				//dbgPrint("addr-1:%p", msgInterface);
+				//----2.调用----
+				int result =  msgInterface->msgOrderManager->httpPost(msgInterface->ip, msgInterface->port, msgInterface->http, msgInterface->data);
+				//----3.处理----
+				msgInterface->result = result;
+				break;
+			}
 
 			return 1;
 			}
