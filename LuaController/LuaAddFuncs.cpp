@@ -4,7 +4,7 @@
 #include "ToolLuaFuncs.h"
 #include "InputLuaFuncs.h"
 #include "OrderLuaFuncs.h"
-
+#include "SystemLuaFuncs.h"
 
 void LuaExecutor::luaAddAllFunc() {
     //====调用路径：lua -> msg -> skill
@@ -99,5 +99,14 @@ void LuaExecutor::luaAddAllFunc() {
     //LOR001
     LuaExecutor::luaAddAFunc("httpPost", luaLHttpPost);
 
+    //=====systemSkill 模块=====
+    //LSS001
+    LuaExecutor::luaAddAFunc("setClipBoardText", luaLSetClipBoardText);
+
+    //LSS002
+    LuaExecutor::luaAddAFunc("getClipBoardText", luaLGetClipBoardText);
+
+    //LSS003
+    LuaExecutor::luaAddAFunc("pasteClipBoardText", luaLPasteClipBoardText);
 
 }

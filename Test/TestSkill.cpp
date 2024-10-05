@@ -2,6 +2,7 @@
 #include <Windows.h>
 #include "Skill.h"
 #include <OrderSkill.h>
+
 using namespace std;
 #using <System.Drawing.dll>
 using namespace System::Drawing;
@@ -224,7 +225,7 @@ void testSkill() {
      //InputAction 015
      //inputAction.keyPress(65);
      //======================================
-     OrderSkill orderSkill;
+     /*OrderSkill orderSkill;
      
      //OrderSkill 001
      int channelLevel = 1;
@@ -238,5 +239,19 @@ void testSkill() {
 
      // 调用 createOrder 方法
      int result = orderSkill.createOrder(channelLevel, serviceID, targetID, resourceID, intVal, stringVal, doubleVal);
-     
+     */
+     //==============================================
+     //SystemSkill systemSkill;
+
+     //SystemSkill 001
+     //systemSkill.setClipBoardText("1012345");
+
+     //SystemSkill 002
+     //string text = systemSkill.GetClipBoardText();
+     //int a;
+
+     //SystemSkill 003
+     //systemSkill.pasteClipBoardText();
+
+
 }

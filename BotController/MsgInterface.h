@@ -5,6 +5,8 @@
 
 //这里存放msg的返回值
 
+using namespace std;
+
 //BM000 - BM003
 typedef struct MsgLoadPic {
 	char* picPath;
@@ -72,5 +74,11 @@ typedef struct MsgOrder {
 	int result;
 } _MsgOrder;
 
+//=========
+//SS001-
+typedef struct MsgSystem {
+	string clipBoardText;
+	string clipBoardTextResult;
+};
 
 

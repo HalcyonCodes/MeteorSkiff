@@ -15,6 +15,7 @@ void OrderManagerBot::botInit() {
 	msgOrderManagerInit(orderManager);
 	msgOrderManagerLogin(orderManager);
 	msgTerminalInit(orderManager);
+	int a;
 
 }
 

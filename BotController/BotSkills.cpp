@@ -9,7 +9,7 @@
 #include "SetWindowHook.h"
 #include "InputAction.h"
 #include "OrderSkill.h"
-
+#include "SystemSkill.h"
 
 
 LRESULT CALLBACK actionsProc(int code, WPARAM wParam, LPARAM lParam) {
@@ -490,7 +490,6 @@ LRESULT CALLBACK actionsProc(int code, WPARAM wParam, LPARAM lParam) {
 				MsgOrder* msgInterface = static_cast<MsgOrder*>((void*)(lpArg->lParam));
 
 				//----2.调用----
-				
 				OrderSkill* orderSkill = new OrderSkill();
 				int result = orderSkill->createOrder(
 					msgInterface->channelLevel,
@@ -501,12 +500,46 @@ LRESULT CALLBACK actionsProc(int code, WPARAM wParam, LPARAM lParam) {
 					msgInterface->stringVal,
 					msgInterface->doubleVal
 				);
+
 				//----3.处理----
 				msgInterface->result = result;
 				delete(orderSkill);
 				break;
 			}*/
+			//====
+			case ss001: {
+				//----1.处理参数----
+				MsgSystem* msgInterface = static_cast<MsgSystem*>((void*)(lpArg->lParam));
 
+				//----2.调用----
+				SystemSkill* systemSkill = new SystemSkill();
+				systemSkill->setClipBoardText(msgInterface->clipBoardText);
+				
+				//----3.处理----
+				delete(systemSkill);
+			}
+			case ss002: {
+				//----1.处理参数----
+				MsgSystem* msgInterface = static_cast<MsgSystem*>((void*)(lpArg->lParam));
+
+				//----2.调用----
+				SystemSkill* systemSkill = new SystemSkill();
+				msgInterface -> clipBoardTextResult = systemSkill->GetClipBoardText();
+
+				//----3.处理----
+				delete(systemSkill);
+			}
+			case ss003: {
+				//----1.处理参数----
+				MsgSystem* msgInterface = static_cast<MsgSystem*>((void*)(lpArg->lParam));
+
+				//----2.调用----
+				SystemSkill* systemSkill = new SystemSkill();
+				systemSkill->pasteClipBoardText();
+
+				//----3.处理----
+				delete(systemSkill);
+			}
 
 
 			}

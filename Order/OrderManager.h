@@ -95,3 +95,37 @@ extern char* JWT;
 }
 */
 
+/*
+{
+  "orderChannelLevel": 1,
+  "order": [
+    {
+      "orderID": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+      "orderService": {
+        "orderServiceID": 1001
+      },
+      "sourceTerminalID": "abcdefg",
+      "targetTerminalID": "Target123",
+      "orderServiceResources": [
+        {
+          
+          "resourceIntValue": 1,
+          "resourceStringValue": "one",
+          "resourceDoubleValue": 1.1
+        },
+        {
+         
+          "resourceIntValue": 2,
+          "resourceStringValue": "two",
+          "resourceDoubleValue": 2.2
+        },
+        {
+          "resourceIntValue": 3,
+          "resourceStringValue": "three",
+          "resourceDoubleValue": 3.3
+        }
+      ]
+    }
+  ]
+}
+*/

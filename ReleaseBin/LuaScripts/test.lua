@@ -81,7 +81,7 @@ end]]--
 --BmpColor 011 findLNPicA
 --[[while (true)
 do
-    r = findLNPicA(0, 0, 0, 1920, 1024, "testFincPic1", 32);
+    r = findLNPicA(0, 0, 0, 1920, 1024, 32);
     dbgPrint(r[1]);
     dbgPrint(r[2]);
     dbgPrint(r[3]);

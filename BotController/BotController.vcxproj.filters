@@ -48,6 +48,9 @@
     <ClInclude Include="OrderSkillController.h">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="SystemSkillController.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="FindPicController.cpp">
@@ -69,6 +72,9 @@
       <Filter>源文件</Filter>
     </ClCompile>
     <ClCompile Include="InputActionController.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="SystemSkillController.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>

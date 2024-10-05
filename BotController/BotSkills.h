@@ -64,6 +64,11 @@
 #define or001 200
 #define or002 201
 
+//----4.系统模块----
+#define ss001 300
+#define ss002 301
+#define ss003 302
+
 
 
 //----钩子函数----
