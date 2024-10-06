@@ -154,6 +154,18 @@ end
 --InputAction 014 keyUp
 --keyUp(65);
 
+--InputAction 015 keyPress
+--keyPress(65)
+
+--InputAction 016 keyPress
+--sendString("123456")
+
+--InputAction 017 sendStringToClipboard
+--sendStringToClipboard("ASDFG")
+
+--InputAction 018 getClipboardText
+--getClipboardText()
+
 -----------Order  ----------
 --order 008 httpPost
 --r = 'localhost';
@@ -164,3 +176,8 @@ end
 --httpPost(r, t, q, w)
 --dbgPrint("66666666");
 dbgPrint("����");
+
+----system------
+
+--getClipboardText()
+

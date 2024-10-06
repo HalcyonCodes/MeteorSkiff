@@ -1,5 +1,4 @@
 
---[[
 ]]--
 
 function delay(seconds)
@@ -126,7 +125,7 @@ end
 
 
 
-loadPics();
+--loadPics();
 
 
 --dd();
@@ -134,7 +133,7 @@ loadPics();
 --ff();
 --gg();
 --hh();
-freeBmp()
+
 
 sendStringToClipboard("ASDFG")
 

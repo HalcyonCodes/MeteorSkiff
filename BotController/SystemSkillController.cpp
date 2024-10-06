@@ -10,24 +10,13 @@
 #include "GetHwndByPID.h"
 #include "BotSkills.h"
 
+//SS001 sleep
+std::string msgGetClipboardText() {
 
-void msgSetClipBoardText(string text) {
 	MsgSystem msgInterface;
-	msgInterface.clipBoardText = text;
+	
 	LRESULT result = SendMessageA(getCurrentHwnd(), botMsgCode, ss001, (LPARAM)&msgInterface);
-	return;
+	return msgInterface.clipBoardtext;
 }
 
-//====ss002 GetClipBoardText
-string msgGetClipBoardText() {
-	MsgSystem msgInterface;
-	LRESULT result = SendMessageA(getCurrentHwnd(), botMsgCode, ss002, (LPARAM)&msgInterface);
-	return msgInterface.clipBoardTextResult;
-}
 
-//====ss003 pasteClipBoardText
-void msgPasteClipBoardText() {
-	MsgSystem msgInterface;
-	LRESULT result = SendMessageA(getCurrentHwnd(), botMsgCode, ss003, (LPARAM)&msgInterface);
-	return;
-}

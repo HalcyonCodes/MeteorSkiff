@@ -52,5 +52,14 @@ int luaLKeyDown(lua_State* L);
 //LIN014 keyUp
 int luaLKeyUp(lua_State* L);
 
+//LIN015 keyPress
+int luaLKeyPress(lua_State* L);
 
+//LIN016 sendString
+int luaLSendString(lua_State* L);
 
+//LIN017
+int luaLSendStringToClipboard(lua_State* L);
+
+//LIN018
+int luaLReadStringFromClipboard(lua_State* L);

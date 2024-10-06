@@ -96,3 +96,13 @@ int msgHttpPost(OrderManager* orderManager, string ip, string port, string http,
 	return msgInterface.result;
 }
 
+//====or009 curlGet
+httplib::Result msgCurlGet(OrderManager* orderManager, string ip, string port, string http) {
+	MsgHttpPost msgInterface;
+	msgInterface.msgOrderManager = orderManager;
+	msgInterface.ip = ip;
+	msgInterface.port = port;
+	msgInterface.http = http;
+	LRESULT result = SendMessageA(orderManagerHwnd, orderMsgCode, or009, (LPARAM)&msgInterface);
+
+}

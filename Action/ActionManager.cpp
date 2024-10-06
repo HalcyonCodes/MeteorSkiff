@@ -180,6 +180,7 @@ void ActionManager::buildScript(const char* json) {
     memset(resultScript, 0x00, sizeof(*resultScript));
     strcat_s(resultScript, strlen(scriptPara) + strlen(sourceScript) + 1, scriptPara);
     strcat_s(resultScript, strlen(scriptPara) + strlen(sourceScript) + 1, sourceScript);
+    //dbgPrint("script: %s", resultScript);
     delete[] scriptPara;
     //delete[] sourceScript;
     this->script = resultScript;

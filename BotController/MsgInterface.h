@@ -54,6 +54,8 @@ typedef struct MsgFindWindow {
 //IM001-IM015
 typedef struct MsgInput {
 	char* windowName = nullptr;
+	char* sendString = nullptr;
+	string resultString;
 	short key;
 	int time;
 	int mouseX;
@@ -77,8 +79,8 @@ typedef struct MsgOrder {
 //=========
 //SS001-
 typedef struct MsgSystem {
-	string clipBoardText;
-	string clipBoardTextResult;
+	string clipBoardtext;
+	
 };
 
 

@@ -41,7 +41,7 @@ DWORD WINAPI meteorSkiffBotWorkThread(LPVOID lpParam)
 
 	//====hookBot====
 	hookBotThread(hwnd);
-	
+
 
 	//========
 
@@ -55,8 +55,6 @@ DWORD WINAPI meteorSkiffBotWorkThread(LPVOID lpParam)
 	return 0;
 
 }
-
-
 
 LRESULT CALLBACK meteorSkiffBotWorkThreadWndProc(HWND hwnd, UINT message, WPARAM wParam, LPARAM lParam)
 {

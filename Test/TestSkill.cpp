@@ -224,7 +224,19 @@ void testSkill() {
 
      //InputAction 015
      //inputAction.keyPress(65);
-     //======================================
+
+     //InputAction 016
+
+     //InputAction 017
+     //inputAction.SendStringToClipboard("qwasdddf");
+
+     //InputAction 018
+     string k = inputAction.readStringFromClipboard();
+     
+     printf("hwnd is %s", k.c_str());
+
+    
+     //====================================== 
      /*OrderSkill orderSkill;
      
      //OrderSkill 001
@@ -243,15 +255,7 @@ void testSkill() {
      //==============================================
      //SystemSkill systemSkill;
 
-     //SystemSkill 001
-     //systemSkill.setClipBoardText("1012345");
-
-     //SystemSkill 002
-     //string text = systemSkill.GetClipBoardText();
-     //int a;
-
-     //SystemSkill 003
-     //systemSkill.pasteClipBoardText();
+  
 
 
 }

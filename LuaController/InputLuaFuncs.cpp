@@ -14,6 +14,8 @@ extern "C" {
 
 }
 #include "DbgPrint.h"
+#include <string>
+using namespace std;
 
 
 
@@ -174,6 +176,46 @@ int luaLKeyUp(lua_State* L) {
     // 返回结果的数量（即压入栈的数量）
     return 1;
 }
+
+
+//LIN015 keyPress
+int luaLKeyPress(lua_State* L) {
+    //从Lua栈中获取参数
+    short key = lua_tointeger(L, 1);
+    //调用
+    int result = msgKeyPress(key);
+    // 将结果压入Lua栈
+    lua_pushnumber(L, result);
+    // 返回结果的数量（即压入栈的数量）
+    return 1;
+}
+
+//LIN016 sendString
+int luaLSendString(lua_State* L) {
+    // 从Lua栈中获取参数
+    string inputString = lua_tostring (L, 1);
+    msgSendString(inputString);
+    // 将结果压入Lua栈
+    // 返回结果的数量（即压入栈的数量）
+    return 0;
+}
+
+
+//LIN017 sendStringToClipboard
+int luaLSendStringToClipboard(lua_State* L) {
+    // 从Lua栈中获取参数
+    string inputString = lua_tostring(L, 1);
+    msgSendStringToClipboard(inputString);
+    return 0;
+}
+
+//LIN018 ReadStringFromClipboard
+int luaLReadStringFromClipboard(lua_State* L) {
+    string result = msgReadStringFromClipboard();
+    lua_pushstring(L, result.c_str());
+    return 1;
+}
+
 
 
 

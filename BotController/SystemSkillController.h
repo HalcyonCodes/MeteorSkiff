@@ -6,11 +6,5 @@
 
 using namespace std;
 
-//====ss001 setClipBoardText
-void msgSetClipBoardText(string text);
-
-//====ss002 GetClipBoardText
-string msgGetClipBoardText();
-
-//====ss003 pasteClipBoardText
-void msgPasteClipBoardText();
+//====ss001 threadSleep
+string msgGetClipboardText();

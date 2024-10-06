@@ -36,3 +36,12 @@ typedef struct MsgHttpPost {
 	string data;
 	int result;
 }_MsgHttpPost;
+
+//or009
+typedef struct MsgHttpGet {
+	OrderManager* msgOrderManager = nullptr;
+	string ip;
+	string port;
+	string http;
+	httplib::Result result;
+}_MsgHttpPost;

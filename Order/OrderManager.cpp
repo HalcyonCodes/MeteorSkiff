@@ -485,3 +485,8 @@ int OrderManager::httpPost(string ip, string port, string http, string data) {
 }
 
 
+httplib::Result OrderManager::curlGet(string ip, string port, string http) {
+	httplib::Client client(ip + ":" + port);
+	httplib::Result res = client.Get(http);
+	return res;
+}

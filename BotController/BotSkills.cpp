@@ -483,6 +483,51 @@ LRESULT CALLBACK actionsProc(int code, WPARAM wParam, LPARAM lParam) {
 				delete(inputAction);
 				break;
 			}
+			case in016: {
+				//in015
+				//----1.处理参数----
+				MsgInput* msgInterface = static_cast<MsgInput*>((void*)(lpArg->lParam));
+
+				//----2.调用----
+				InputAction* inputAction = new InputAction();
+				inputAction->SendString(msgInterface->sendString);
+
+				//----3.处理----
+				//msgInterface->result = result;
+				delete(inputAction);
+				break;
+			}
+
+			case in017: {
+				//in015
+				//----1.处理参数----
+				MsgInput* msgInterface = static_cast<MsgInput*>((void*)(lpArg->lParam));
+
+				//----2.调用----
+				InputAction* inputAction = new InputAction();
+				inputAction->sendStringToClipboard(msgInterface->sendString);
+
+				//----3.处理----
+				//msgInterface->result = result;
+				delete(inputAction);
+				break;
+			}
+
+			case in018: {
+				//in015
+				//----1.处理参数----
+				MsgInput* msgInterface = static_cast<MsgInput*>((void*)(lpArg->lParam));
+
+				//----2.调用----
+				InputAction* inputAction = new InputAction();
+				msgInterface->resultString = inputAction->readStringFromClipboard();
+
+				//----3.处理----
+				//msgInterface->result = result;
+				delete(inputAction);
+				break;
+			}
+
 			//=====
 			/*case or001: {
 				//or001
@@ -513,33 +558,15 @@ LRESULT CALLBACK actionsProc(int code, WPARAM wParam, LPARAM lParam) {
 
 				//----2.调用----
 				SystemSkill* systemSkill = new SystemSkill();
-				systemSkill->setClipBoardText(msgInterface->clipBoardText);
+				msgInterface->clipBoardtext = systemSkill->GetClipboardText();
 				
 				//----3.处理----
 				delete(systemSkill);
+				break;
 			}
-			case ss002: {
-				//----1.处理参数----
-				MsgSystem* msgInterface = static_cast<MsgSystem*>((void*)(lpArg->lParam));
-
-				//----2.调用----
-				SystemSkill* systemSkill = new SystemSkill();
-				msgInterface -> clipBoardTextResult = systemSkill->GetClipBoardText();
-
-				//----3.处理----
-				delete(systemSkill);
-			}
-			case ss003: {
-				//----1.处理参数----
-				MsgSystem* msgInterface = static_cast<MsgSystem*>((void*)(lpArg->lParam));
-
-				//----2.调用----
-				SystemSkill* systemSkill = new SystemSkill();
-				systemSkill->pasteClipBoardText();
-
-				//----3.处理----
-				delete(systemSkill);
-			}
+			
+			
+			
 
 
 			}

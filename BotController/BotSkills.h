@@ -59,6 +59,10 @@
 #define in013 42
 #define in014 43
 #define in015 44
+#define in016 45
+#define in017 46
+#define in018 47
+#define in019 48
 
 //----3,¶©µ¥Ä£¿é----
 #define or001 200

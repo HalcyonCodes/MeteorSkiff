@@ -4,7 +4,9 @@
 
 
 #include "Windows.h"
+#include <String>
 
+using namespace std;
 
 //====ins001 inputInit====
 void msgInputInit(const char* windowName);
@@ -51,6 +53,12 @@ int msgKeyUp(short key);
 //====ins015 keyPress====
 int msgKeyPress(short key);
 
+//====ins016 sendString====
+void msgSendString(string inputString);
 
+//====ins017 sendStringToClipboard
+void msgSendStringToClipboard(string string);
 
+//====ins018 readStringFromClipboard
+string msgReadStringFromClipboard();
 

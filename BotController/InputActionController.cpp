@@ -130,7 +130,26 @@ int msgKeyPress(short key) {
 	return msgInterface.result;
 }
 
+//====ins016 sendString
+void msgSendString(string inputString) {
+	MsgInput msgInterface;
+	msgInterface.sendString = (char*)inputString.c_str();
+	LRESULT result = SendMessageA(botHwnd, botMsgCode, in016, (LPARAM)&msgInterface);
+	return;
+}
+
+//====ins017
+void msgSendStringToClipboard(string inputString) {
+	MsgInput msgInterface;
+	msgInterface.sendString = (char*)inputString.c_str();
+	LRESULT result = SendMessageA(botHwnd, botMsgCode, in017, (LPARAM)&msgInterface);
+	return;
+}
 
 
-
-
+//====ins018
+string msgReadStringFromClipboard() {
+	MsgInput msgInterface;
+	LRESULT result = SendMessageA(botHwnd, botMsgCode, in017, (LPARAM)&msgInterface);
+	return msgInterface.resultString;
+}

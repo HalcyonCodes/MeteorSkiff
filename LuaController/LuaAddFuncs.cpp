@@ -95,18 +95,26 @@ void LuaExecutor::luaAddAllFunc() {
     // LIN014
     LuaExecutor::luaAddAFunc("keyUp", luaLKeyUp);
 
+    //LIN015
+    LuaExecutor::luaAddAFunc("keyPress", luaLKeyPress);
+
+    //LIN016
+    LuaExecutor::luaAddAFunc("sendString", luaLSendString);
+
+    //LIN017
+    LuaExecutor::luaAddAFunc("sendStringToClipboard", luaLSendStringToClipboard);
+
+	//LIN018
+	LuaExecutor::luaAddAFunc("getClipboardTexti", luaLGetClipboardText);
+
     //=====order Ä£¿é=====
     //LOR001
     LuaExecutor::luaAddAFunc("httpPost", luaLHttpPost);
 
     //=====systemSkill Ä£¿é=====
     //LSS001
-    LuaExecutor::luaAddAFunc("setClipBoardText", luaLSetClipBoardText);
+   // LuaExecutor::luaAddAFunc("getClipboardText", luaLGetClipboardText);
+    
 
-    //LSS002
-    LuaExecutor::luaAddAFunc("getClipBoardText", luaLGetClipBoardText);
-
-    //LSS003
-    LuaExecutor::luaAddAFunc("pasteClipBoardText", luaLPasteClipBoardText);
 
 }

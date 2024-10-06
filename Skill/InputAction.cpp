@@ -156,9 +156,38 @@ int InputAction::keyPress(short key)
 	return result;
 }
 
+void InputAction::SendString(string string) {
+	BlessInput::InputAction^ inputAction = gcnew BlessInput::InputAction();
+	String^ inputString = marshal_as<System::String^>(string);
+	inputAction->SendString(inputString);
+	delete inputAction;
+	inputAction = nullptr;
+	return;
+}
 
 
+int InputAction::sendStringToClipboard(string string) {
+	BlessInput::InputAction^ inputAction = gcnew BlessInput::InputAction();
+	String^ inputString = marshal_as<System::String^>(string);
+	inputAction->SendStringToClipboard(inputString);
+	delete inputAction;
+	inputAction = nullptr;
+	return 0;
+}
 
+string InputAction::readStringFromClipboard() {
 
+	BlessInput::InputAction^ inputAction = gcnew BlessInput::InputAction();
 
+	// 调用C#方法获取托管的String^
+	String^ managedString = inputAction->ReadStringFromClipboard();
 
+	// 销毁C#对象
+	delete inputAction;
+	inputAction = nullptr;
+
+	// 转换托管的String^到非托管的std::string
+	std::string result = marshal_as<std::string>(managedString);
+
+	return result;
+}

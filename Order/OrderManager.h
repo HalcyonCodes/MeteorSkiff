@@ -6,6 +6,10 @@
 
 using namespace std;
 
+#include <winsock2.h>
+#include <iphlpapi.h>
+#include <iostream>
+#include "httplib.h"
 
 
 typedef struct OrderManager {
@@ -31,8 +35,10 @@ typedef struct OrderManager {
 	void login(); //向服务器发送登录请求，获取jwt令牌
 	int sendOrderStatus(const char* orderId, int status); //另一个线程完成订单后,向服务器发送订单完成状态，通知服务器删除订单
     int terminalInit(); //初始化终端
-    int httpPost(string ip, string port, string http, string data); //发送post请求
-    
+    int httpPost(string ip, string port, string http, string data); //向自己的服务器发送post请求
+
+    httplib::Result curlGet(string ip, string port, string http); //向别人的服务器发起get请求
+
 }_OrderManager;
 
 extern OrderManager* orderManager;
@@ -128,4 +134,10 @@ extern char* JWT;
     }
   ]
 }
+*/
+
+/* 脚本参数的样子。StockID为服务器的参数名称
+para["StockIDIntVal"] = 123;
+para["StockIDDoubleVal"] = 123.000000;
+para["StockIDStringVal"] = "string";
 */

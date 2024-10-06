@@ -55,4 +55,12 @@ typedef struct InputAction {
 	// 按键一次
 	int keyPress(short key);
 
+	// sendInput发送字符
+	void SendString(string string);
+
+	// SendStringToClipboard 
+	int sendStringToClipboard(string string);
+
+	std::string readStringFromClipboard();
+
 }_InputAction;

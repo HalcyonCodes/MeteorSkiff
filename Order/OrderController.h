@@ -34,3 +34,6 @@ void msgTerminalInit(OrderManager* orderManager);
 
 //====or008 =====
 int msgHttpPost(OrderManager* orderManager, string ip, string port, string http, string data);
+
+//====or009 ====
+httplib::Result msgCurlGet(OrderManager* orderManager, string ip, string port, string http);
