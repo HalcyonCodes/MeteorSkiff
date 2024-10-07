@@ -175,7 +175,6 @@ end
 --dbgPrint("����");
 --httpPost(r, t, q, w)
 --dbgPrint("66666666");
-dbgPrint("����");
 
 --order 009 curlGet
 --q = "qt.gtimg.cn"
@@ -186,6 +185,20 @@ dbgPrint("����");
 --dbgPrint(r[1]) --status
 --dbgPrint(r[2])  --result body
 
+--order 010 curlPost
+--q = "127.0.0.1"
+--s = "5036"
+--c = "/api/v1/Account/Login"
+--z = "{\"userName\" : " .. "\"stringName\"" .. "," .. "\"password\": \"" .. "z12312" .. "\"}"
+--dbgPrint('sss')
+--r = curlPost(q, s, c ,z , "");
+--jwt = "";
+--for match in string.gmatch(r[2], '"Access_token":"(.-)"') do
+ -- jwt = match;
+--end
+--c = "/api/v1/Account/PostTest"
+--r = curlPost(q, s, c ,z , jwt);
+--dbgPrint(r[1]);
 
 ----system------
 

@@ -43,5 +43,7 @@ typedef struct MsgHttpGet {
 	string ip;
 	string port;
 	string http;
+	string data;
+	string jwt;
 	httplib::Result result;
 }_MsgHttpGet;

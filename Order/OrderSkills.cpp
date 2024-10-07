@@ -169,6 +169,22 @@ LRESULT CALLBACK orderProc(int code, WPARAM wParam, LPARAM lParam) {
 				break;
 
 			}
+			case or010: {
+				//or 010
+				//----1.处理参数----
+				MsgHttpGet* msgInterface = static_cast<MsgHttpGet*>((void*)(lpArg->lParam));
+				//memset(msgInterface->name, 0x00, 512);
+				//dbgPrint("addr-1:%p", msgInterface);
+				//----2.调用----
+
+				msgInterface->result = msgInterface->msgOrderManager
+					->curlPost(msgInterface->ip, msgInterface->port, msgInterface->http, msgInterface->data,msgInterface->jwt);
+
+				//----3.处理----
+
+				break;
+
+			}
 			return 1;
 			}
 

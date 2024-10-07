@@ -114,6 +114,9 @@ void LuaExecutor::luaAddAllFunc() {
     //LOR002
     LuaExecutor::luaAddAFunc("curlGet", luaLCurlGet);
 
+    //LOR003
+    LuaExecutor::luaAddAFunc("curlPost", luaLCurlPost);
+
     //=====systemSkill Ä£¿é=====
     //LSS001
    // LuaExecutor::luaAddAFunc("getClipboardText", luaLGetClipboardText);

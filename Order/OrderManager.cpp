@@ -485,8 +485,30 @@ int OrderManager::httpPost(string ip, string port, string http, string data) {
 }
 
 
+
 httplib::Result OrderManager::curlGet(string ip, string port, string http) {
 	httplib::Client client(ip + ":" + port);
 	httplib::Result res = client.Get(http);
 	return res;
 }
+
+httplib::Result OrderManager::curlPost(string ip, string port, string http ,string data, string jwt) {
+
+	httplib::Client client(ip + ":" + port);
+	client.set_default_headers({
+		{"Authorization", ""}
+		});
+
+	httplib::Headers headers;
+	std::string authorizationHeader = "Bearer " + std::string(jwt);
+
+	headers = {
+	{"Authorization", authorizationHeader}
+	};
+	
+	std::string postJson = data;
+
+	httplib::Result res = client.Post(http, headers, postJson, "application/json");
+	return res;
+}
+

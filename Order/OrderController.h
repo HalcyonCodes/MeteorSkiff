@@ -37,3 +37,6 @@ int msgHttpPost(OrderManager* orderManager, string ip, string port, string http,
 
 //====or009 ====
 httplib::Result msgCurlGet(OrderManager* orderManager, string ip, string port, string http);
+
+//====or010=====
+httplib::Result msgCurlPost(OrderManager* orderManager, string ip, string port, string http, string data, string jwt);

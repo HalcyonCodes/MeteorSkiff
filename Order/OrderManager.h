@@ -38,6 +38,7 @@ typedef struct OrderManager {
     int httpPost(string ip, string port, string http, string data); //向自己的服务器发送post请求
 
     httplib::Result curlGet(string ip, string port, string http); //向别人的服务器发起get请求
+    httplib::Result curlPost(string ip, string port, string http, string data, string jwt); //向别人的服务器发起post请求
 
 }_OrderManager;
 

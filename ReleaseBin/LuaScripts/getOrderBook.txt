@@ -1,4 +1,4 @@
-
+读取股票数据接口
 --[[
 ]]--
 
@@ -51,9 +51,7 @@ end
 q = "127.0.0.1"
 s = "5016"
 c = "/api/v1/Account/Login"
-
 z = "{\"userName\" : " .. "\"stringName\"" .. "," .. "\"password\": \"" .. "z12312" .. "\"}"
-
 r = curlPost(q, s, c ,z , ""); --登录
 jwt = "";
 for match in string.gmatch(r[2], '"Access_token":"(.-)"') do

@@ -111,3 +111,19 @@ httplib::Result msgCurlGet(OrderManager* orderManager, string ip, string port, s
 	// 使用 std::move 来避免使用拷贝构造函数
 	return std::move(msgInterfacePtr->result);
 }
+
+//====or010 curlPost
+httplib::Result msgCurlPost(OrderManager* orderManager, string ip, string port, string http, string data, string jwt) {
+	auto msgInterfacePtr = std::make_unique<MsgHttpGet>();
+	msgInterfacePtr->msgOrderManager = orderManager;
+	msgInterfacePtr->ip = ip;
+	msgInterfacePtr->port = port;
+	msgInterfacePtr->http = http;
+	msgInterfacePtr->data = data;
+	msgInterfacePtr->jwt = jwt;
+
+	LRESULT result = SendMessageA(orderManagerHwnd, orderMsgCode, or010, reinterpret_cast<LPARAM>(msgInterfacePtr.get()));
+
+	// 使用 std::move 来避免使用拷贝构造函数
+	return std::move(msgInterfacePtr->result);
+}
