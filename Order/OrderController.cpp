@@ -11,7 +11,8 @@
 #include <string>
 #include "SetWindowHookOrder.h"
 #include <mutex>
-
+#include"httplib.h"
+#include <memory>
 using namespace std;
 
 
@@ -97,12 +98,16 @@ int msgHttpPost(OrderManager* orderManager, string ip, string port, string http,
 }
 
 //====or009 curlGet
-httplib::Result msgCurlGet(OrderManager* orderManager, string ip, string port, string http) {
-	MsgHttpPost msgInterface;
-	msgInterface.msgOrderManager = orderManager;
-	msgInterface.ip = ip;
-	msgInterface.port = port;
-	msgInterface.http = http;
-	LRESULT result = SendMessageA(orderManagerHwnd, orderMsgCode, or009, (LPARAM)&msgInterface);
+httplib::Result msgCurlGet(OrderManager* orderManager, string ip, string port, string http) 
+{
+	auto msgInterfacePtr = std::make_unique<MsgHttpGet>();
+	msgInterfacePtr->msgOrderManager = orderManager;
+	msgInterfacePtr->ip = ip;
+	msgInterfacePtr->port = port;
+	msgInterfacePtr->http = http;
 
+	LRESULT result = SendMessageA(orderManagerHwnd, orderMsgCode, or009, reinterpret_cast<LPARAM>(msgInterfacePtr.get()));
+
+	// 使用 std::move 来避免使用拷贝构造函数
+	return std::move(msgInterfacePtr->result);
 }

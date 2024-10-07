@@ -157,15 +157,15 @@ LRESULT CALLBACK orderProc(int code, WPARAM wParam, LPARAM lParam) {
 			case or009: {
 				//or 009
 				//----1.处理参数----
-				MsgHttpPost* msgInterface = static_cast<MsgHttpPost*>((void*)(lpArg->lParam));
+				MsgHttpGet* msgInterface = static_cast<MsgHttpGet*>((void*)(lpArg->lParam));
 				//memset(msgInterface->name, 0x00, 512);
 				//dbgPrint("addr-1:%p", msgInterface);
 				//----2.调用----
 				
-				httplib::Result res = msgInterface->msgOrderManager->curlGet(msgInterface->ip, msgInterface->port, msgInterface->http);
+				msgInterface->result = msgInterface->msgOrderManager->curlGet(msgInterface->ip, msgInterface->port, msgInterface->http);
 
 				//----3.处理----
-				msgInterface->result = res;
+				
 				break;
 
 			}

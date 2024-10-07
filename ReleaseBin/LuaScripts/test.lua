@@ -177,6 +177,16 @@ end
 --dbgPrint("66666666");
 dbgPrint("����");
 
+--order 009 curlGet
+--q = "qt.gtimg.cn"
+--s = "80"
+--c = "/"
+
+--r = curlGet(q, s, c);
+--dbgPrint(r[1]) --status
+--dbgPrint(r[2])  --result body
+
+
 ----system------
 
 --getClipboardText()
