@@ -11,7 +11,7 @@ end
 
 stockId = para["StockIDStringVal"]
 
---dbgPrint(stockId );
+dbgPrint(stockId );
 
 q = "qt.gtimg.cn"
 s = "80"
@@ -47,21 +47,26 @@ for param in string.gmatch(r[2], "[^~]+") do
   end
   index = index + 1
 end
-
+--====登录=====
 q = "127.0.0.1"
 s = "5016"
 c = "/api/v1/Account/Login"
-
 z = "{\"userName\" : " .. "\"stringName\"" .. "," .. "\"password\": \"" .. "z12312" .. "\"}"
-
 r = curlPost(q, s, c ,z , ""); --登录
 jwt = "";
 for match in string.gmatch(r[2], '"Access_token":"(.-)"') do
   jwt = match;
 end
+--dbgPrint("kk" .. r[1])
 c = "/api/v1/TradeData/AddTradeBuyToStock"
 --c = "/api/v1/Account/PostTest"
-z = "{\"price\" : " .. "\"" .. buyPrice .."\"" .. "," .. "\"count\": \"" .. buyCount .. "\"" ..",\"stockId\": \"" .. stockId .. "\"}";
+local buyPrice = buyPrice -- 
+local buyCount = buyCount -- 
+local stockId = stockId -- 
+
+z = string.format('{"price" : "%s", "count" : "%s", "stockId" : "%s"}', buyPrice, buyCount, stockId)
+
 --dbgPrint(z);
 r = curlPost(q, s, c ,z , jwt);
---dbgPrint(r[1])
+--dbgPrint("zz")
+dbgPrint(r[1])

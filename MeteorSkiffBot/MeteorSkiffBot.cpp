@@ -24,6 +24,7 @@ void MeteorSkiffBot::botInit() {
 	//actionManager初始化
 	int r = actionManager->loadAllScript(); //加载所有lua文件
 
+	int a = 10;
 	//luaExecutor初始化
 	//luaExecutor->luaInit(); //创建lua环境
 	//luaExecutor->luaAddAllFunc();  //添加所有lua函数以便注册
