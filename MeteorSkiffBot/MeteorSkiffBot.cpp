@@ -89,7 +89,8 @@ int MeteorSkiffBot::botRun() {
 			doc.Parse(targetOrder.c_str());
 			string orderId = doc["orderId"].GetString();
 			status = 2; //-1为等待，0为锁定，1为工作，2为完成
-			msgSendOrderStatus(orderManager, orderId, status);
+
+			//msgSendOrderStatus(orderManager, orderId, status);
 
 			//7.清理lua执行器
 			luaExecutor->luaExit();

@@ -1,4 +1,4 @@
---模拟炒股购入脚本
+--模拟炒股卖出脚本--
 
 function delay(seconds)
   local start_time = os.clock()
@@ -8,7 +8,7 @@ function delay(seconds)
 end
 
 function loadPics()
-    local path = [[.\\Pics\\vBuy1.bmp|.\\Pics\\vBuy2.bmp|.\\Pics\\vStockID.bmp|.\\Pics\\vLast.bmp|.\\Pics\\vBuyPrice.bmp|.\\Pics\\vBuyCount.bmp|.\\Pics\\vBuyButton.bmp|.\\Pics\\vQueDing.bmp|.\\Pics\\vQueDing2.bmp]]
+    local path = [[.\\Pics\\vQueDing3.bmp|.\\Pics\\vSellButton.bmp|.\\Pics\\vSellCount.bmp|.\\Pics\\vSellPrice.bmp|.\\Pics\\vSell1.bmp|.\\Pics\\vSell2.bmp|.\\Pics\\vBuy1.bmp|.\\Pics\\vBuy2.bmp|.\\Pics\\vStockID.bmp|.\\Pics\\vLast.bmp|.\\Pics\\vBuyPrice.bmp|.\\Pics\\vBuyCount.bmp|.\\Pics\\vBuyButton.bmp|.\\Pics\\vQueDing.bmp|.\\Pics\\vQueDing2.bmp]]
     loadBmp(path)
     inputInit("");
 end
@@ -18,8 +18,8 @@ function dd()
   
   local flag = true;
   while flag do
-    local r = findDAPicA(0, 0, 0, 1920, 1024, "vBuy1", 32);
-    local z = findDAPicA(0, 0, 0, 1920, 1024, "vBuy2", 32);
+    local r = findDAPicA(0, 0, 0, 1920, 1024, "vSell1", 12);
+    local z = findDAPicA(0, 0, 0, 1920, 1024, "vSell2", 12);
     
     if r[1] >= 0 then
      --dbgPrint(r[1]);
@@ -67,7 +67,7 @@ end
 function ff()
   local flag = true;
   while flag do
-    local r = findDAPicA(0, 0, 0, 1920, 1024, "vBuyPrice", 32);
+    local r = findDAPicA(0, 0, 0, 1920, 1024, "vSellPrice", 32);
     if r[1] >= 0 then
       moveTo(r[1] + 110, r[2] + 12)
       lOnClick()
@@ -93,7 +93,7 @@ end
 function gg()
   local flag = true;
   while flag do
-    local r = findDAPicA(0, 0, 0, 1920, 1024, "vBuyCount", 32);
+    local r = findDAPicA(0, 0, 0, 1920, 1024, "vSellCount", 32);
     if r[1] >= 0 then
       moveTo(r[1] + 110, r[2] + 12)
       lOnClick()
@@ -118,7 +118,7 @@ end
 function HH()
   local flag = true;
   while flag do
-    local r = findDAPicA(0, 0, 0, 1920, 1024, "vBuyButton", 32);
+    local r = findDAPicA(0, 0, 0, 1920, 1024, "vSellButton", 32);
     if r[1] >= 0 then
       moveTo(r[1] + 12, r[2] + 12)
       lOnClick()
@@ -136,7 +136,7 @@ function II()
   delay(0.5)
   local flag = true;
   while flag do
-    local r = findDAPicA(0, 0, 0, 1920, 1024, "vQueDing2", 32);
+    local r = findDAPicA(0, 0, 0, 1920, 1024, "vQueDing3", 32);
     if r[1] >= 0 then
       moveTo(r[1] + 22, r[2] + 22)
       lOnClick()
