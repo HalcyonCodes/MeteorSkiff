@@ -59,6 +59,9 @@ void OrderManager::addServerOrders() {
 	
 		const char* httpOrderId = orders["orderID"].GetString();
 
+		//设置服务器端订单为等待
+		this->sendOrderStatus(httpOrderId, 0);
+
 		bool isHas = false;
 		for (const auto& t : orderIds) {
 			//dbgPrint("t1:%s", t);
@@ -124,8 +127,7 @@ void OrderManager::addServerOrders() {
 			strcpy_s(newOrderChar, newOrder.length() + 1, newOrder.c_str());
 			this->orders.push_back(newOrderChar);
 
-			//设置服务器端订单为等待
-			this->sendOrderStatus(httpOrderId, 0);
+			
 		}
 	//}
 	return;
