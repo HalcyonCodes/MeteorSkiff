@@ -162,7 +162,7 @@ char* ActionManager::getScriptPara(const char* json) {
 
     strcpy_s(charPtr, len + 1, luaCommond.c_str());
     charPtr[len] = '\0';
-    //dbgPrint("para : %s", charPtr);
+    dbgPrint("para : %s", charPtr);
     return charPtr;
 
 }

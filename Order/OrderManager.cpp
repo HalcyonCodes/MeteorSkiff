@@ -45,13 +45,15 @@ void OrderManager::addServerOrders() {
 
 	list<const char*> orderIds;
 
+	const rapidjson::Value& orders = httpResultDoc["order"];
+
 	for (const auto& t : this->orders) {
 		orderDoc.Parse(t);
 
 		orderIds.push_back(orderDoc["orderId"].GetString());
 	}
 
-	const rapidjson::Value& orders = httpResultDoc["order"];
+	
 
 	//const char* test = orders["orderID"].GetString();
 
@@ -59,20 +61,23 @@ void OrderManager::addServerOrders() {
 	
 		const char* httpOrderId = orders["orderID"].GetString();
 
-		//设置服务器端订单为等待
-		this->sendOrderStatus(httpOrderId, 0);
+		
 
 		bool isHas = false;
 		for (const auto& t : orderIds) {
 			//dbgPrint("t1:%s", t);
 			//dbgPrint("t2:%s", httpOrderId);
-			isHas = (strcmp(t, httpOrderId) == 0);
+			isHas = (strcmp(t, httpOrderId) == 0 );
+			if (orders["status"] == 0) {
+				//dbgPrint("qqqqqq");
+				isHas = true;
+			}
 			if (isHas == true) {
 				break;
 			}
 		}
 
-		if (isHas == true) {
+		if (isHas == true || orders["status"] == 0) {
 			
 		}
 		else {
@@ -130,6 +135,8 @@ void OrderManager::addServerOrders() {
 			
 		}
 	//}
+		//设置服务器端订单为等待
+		this->sendOrderStatus(httpOrderId, 0);
 	return;
 }
 
