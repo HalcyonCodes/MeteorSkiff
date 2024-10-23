@@ -71,12 +71,12 @@ function ff()
     if r[1] >= 0 then
       moveTo(r[1] + 110, r[2] + 12)
       lOnClick()
-      delay(0.2)
+      delay(0.1)
       lOnClick()
       keyPress(8);
       delay(0.6)
       local t = para["StockPriceDoubleVal"]
-      --dbgPrint(t)
+      dbgPrint(t)
       sendString(t)
 
 
@@ -97,12 +97,12 @@ function gg()
     if r[1] >= 0 then
       moveTo(r[1] + 110, r[2] + 12)
       lOnClick()
-      delay(0.2)
+      delay(0.1)
       lOnClick()
       keyPress(8);
-      delay(0.6)
+      delay(1)
       local t = para["StockCountIntVal"]
-      --dbgPrint(t)
+      dbgPrint(t)
       sendString(t)
 
 
@@ -140,7 +140,7 @@ function II()
     if r[1] >= 0 then
       moveTo(r[1] + 22, r[2] + 22)
       lOnClick()
-      delay(0.5)
+      delay(1)
     end
     --check
     local c = findDAPicA(0, 0, 0, 1920, 1024, "vQueDing", 32);

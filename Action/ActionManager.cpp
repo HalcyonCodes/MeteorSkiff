@@ -106,7 +106,7 @@ char* ActionManager::getScript(const char* json) {
         // 截取从开始到点之前的字符串，并赋值回 scriptName
     string newName = name.substr(0, dotPos);
     
-    dbgPrint("sssss : %s", newName.c_str());
+    //dbgPrint("sssss : %s", newName.c_str());
 
     char* result = scripts[newName];
 
@@ -162,7 +162,7 @@ char* ActionManager::getScriptPara(const char* json) {
 
     strcpy_s(charPtr, len + 1, luaCommond.c_str());
     charPtr[len] = '\0';
-    //dbgPrint("para : %s", charPtr);
+    dbgPrint("para : %s", charPtr);
     return charPtr;
 
 }

@@ -33,7 +33,7 @@ end
 
 
 function loadPics()
-    local path = [[.\\Pics\\vCancelOrder1.bmp|.\\Pics\\vCancelOrder2.bmp|.\\Pics\\vCancelBuy.bmp|.\\Pics\\vCancelQueDing.bmp|.\\Pics\\vCancelFlag.bmp]]
+    local path = [[.\\Pics\\vCancelOrder1.bmp|.\\Pics\\vCancelOrder2.bmp|.\\Pics\\vCancelSell.bmp|.\\Pics\\vCancelQueDing.bmp|.\\Pics\\vCancelFlag.bmp|.\\Pics\\vCancelBuy.bmp]]
     loadBmp(path)
     inputInit("");
     --dbgPrint("loadPics")
