@@ -78,25 +78,43 @@ function ee()
         while flag do
             moveTo(w[1] + 15, w[2] + 12)
             lOnClick()
-            delay(0.2)
-            lOnClick()
+            --delay(0.2)
+            --lOnClick()
             --check
-            local q = findDAPicA(0, 0, 0, 1920, 1024, "vCancelQueDing", 12);
+            local q = findDAPicA(0, 0, 0, 1920, 1024, "vCancelFlag", 12);
             if q[1] >= 0 then
                 moveTo(q[1] + 15, q[2] + 12)
                 lOnClick()
                 --dbgPrint("find")
                 flag = false
             end
-        end
+            delay(0.2)
+            q = findDAPicA(0, 0, 0, 1920, 1024, "vCancelQueDing", 12);
+            if q[1] >= 0 then
+                moveTo(q[1] + 15, q[2] + 12)
+                lOnClick()
+                --dbgPrint("find")
+                flag = false
+            end
+            delay(0.2)
+            q = findDAPicA(0, 0, 0, 1920, 1024, "vCancelQueDing", 12);
+            if q[1] >= 0 then
+                moveTo(q[1] + 15, q[2] + 12)
+                lOnClick()
+                --dbgPrint("find")
+                flag = false
+            end
+
+        end 
+       
     else
-        stockID = "sz002241" --需要配置的地方
+        stockID = "sh510050" --需要配置的地方
 
         --卖出成功
         --1.获取卖出价
         q = "127.0.0.1"
         s = "5016"                                           --需要修改接口
-        c = "/api/v1/TradeData/GetLastFourTradeBuy?stockID=sz002241" --需要修改配置股票代码
+        c = "/api/v1/TradeData/GetLastFourTradeBuy?stockID=sh510050" --需要修改配置股票代码
         r = curlGet(q, s, c);
         --r = curlGet(q, s, c);
         --dbgPrint(r[2])

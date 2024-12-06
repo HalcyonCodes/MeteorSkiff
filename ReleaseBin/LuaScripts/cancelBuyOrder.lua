@@ -79,8 +79,14 @@ function ee()
             moveTo(r[1] + 15, r[2] + 12)
             lOnClick()
             delay(0.2)
-            lOnClick()
-            --check
+
+            local d = findDAPicA(0, 0, 0, 1920, 1024, "vCancelFlag", 32);
+            if d[1] >= 0 then
+                moveTo(d[1] + 15, d[2] + 12)
+                lOnClick()
+                delay(0.2)
+            end
+             --check
             local q = findDAPicA(0, 0, 0, 1920, 1024, "vCancelQueDing", 12);
             if q[1] >= 0 then
                 moveTo(q[1] + 15, q[2] + 12)
@@ -88,12 +94,20 @@ function ee()
                 --dbgPrint("find")
                 flag = false
             end
+            local q = findDAPicA(0, 0, 0, 1920, 1024, "vCancelQueDing", 12);
+            if q[1] >= 0 then
+                moveTo(q[1] + 15, q[2] + 12)
+                lOnClick()
+                --dbgPrint("find")
+                flag = false
+            end
+            
         end
     else
         --====1.获取股票价格
         q = "127.0.0.1"
         s = "5016"                                           --需要修改接口
-        c = "/api/v1/TradeData/GetLastFourTradeBuy?stockID=sz002241" --需要修改配置股票代码
+        c = "/api/v1/TradeData/GetLastFourTradeBuy?stockID=sh510050" --需要修改配置股票代码
         r = curlGet(q, s, c);
         --r = curlGet(q, s, c);
         --dbgPrint(r[2])
@@ -126,7 +140,7 @@ function ee()
          s = "5016"      --需要修改                                  
         c = "/api/v1/Trade/AddStockHolding"
         local stockHoldingID = "3fa85f64-5717-4562-b3fc-2c963f66afa6"
-        local stockID = "sz002241"
+        local stockID = "sh510050"
         local count = 100
         local buyPrice = price1  -- 假设这是你的股票购买价格
         local z = string.format([[

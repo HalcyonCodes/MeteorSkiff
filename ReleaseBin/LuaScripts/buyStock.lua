@@ -8,7 +8,7 @@ function delay(seconds)
 end
 
 function loadPics()
-    local path = [[.\\Pics\\vBuy1.bmp|.\\Pics\\vBuy2.bmp|.\\Pics\\vStockID.bmp|.\\Pics\\vLast.bmp|.\\Pics\\vBuyPrice.bmp|.\\Pics\\vBuyCount.bmp|.\\Pics\\vBuyButton.bmp|.\\Pics\\vQueDing.bmp|.\\Pics\\vQueDing2.bmp]]
+    local path = [[.\\Pics\\vBuy1.bmp|.\\Pics\\vBuy2.bmp|.\\Pics\\vStockID.bmp|.\\Pics\\vBuyPrice.bmp|.\\Pics\\vBuyCount.bmp|.\\Pics\\vBuyButton.bmp|.\\Pics\\vQueDing.bmp|.\\Pics\\vQueDing2.bmp]]
     loadBmp(path)
     inputInit("");
 end
@@ -180,4 +180,4 @@ ff();
 gg();
 HH();
 II();
-JJ();
+--JJ();
