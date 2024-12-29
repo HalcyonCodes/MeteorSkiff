@@ -170,7 +170,8 @@ char* ActionManager::getScriptPara(const char* json) {
 void ActionManager::buildScript(const char* json) {
 
     if (this->script != nullptr) {
-        delete[] this->script;
+        //delete[] this->script;
+        delete this->script;
         this->script = nullptr;
     }
 

@@ -33,7 +33,7 @@ function dd()
     end
 
     --check
-    local q = findDAPicA(0, 0, 0, 1920, 1024, "vStockID", 12);
+    local q = findDAPicA(0, 0, 0, 1920, 1024, "vBuyPrice", 32);
     if  q[1] >= 0 then
         flag = false
         --dbgPrint("find")
@@ -45,7 +45,7 @@ end
 function ee()
   local flag = true;
   while flag do
-    local r = findDAPicA(0, 0, 0, 1920, 1024, "vStockID", 12);
+    local r = findDAPicA(0, 0, 0, 1920, 1024, "vStockID", 32);
     if r[1] >= 0 then
       moveTo(r[1]+120, r[2] + 12)
       lOnClick()
@@ -125,9 +125,11 @@ function HH()
     end
 
       --check
-      local c = findDAPicA(0, 0, 0, 1920, 1024, "vStockID", 32);
-      if c[1] >= 0 then
+      --local c = findDAPicA(0, 0, 0, 1920, 1024, "vStockID", 32);
+      local r = findDAPicA(0, 0, 0, 1920, 1024, "vQueDing2", 32);
+      if r[1] >= 0 then
         flag = false
+        --dbgPrint("find2")
       end
   end
 end
@@ -138,13 +140,15 @@ function II()
   while flag do
     local r = findDAPicA(0, 0, 0, 1920, 1024, "vQueDing2", 32);
     if r[1] >= 0 then
+      
+      --dbgPrint("find3")
       moveTo(r[1] + 22, r[2] + 22)
       lOnClick()
       delay(0.5)
     end
     --check
-    local c = findDAPicA(0, 0, 0, 1920, 1024, "vQueDing", 32);
-      if c[1] >= 0 then
+    local c = findDAPicA(0, 0, 0, 1920, 1024, "vQueDing2", 32);
+      if c[1] < 0 then
         flag = false
       end
   end

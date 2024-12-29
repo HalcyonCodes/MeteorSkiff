@@ -8,7 +8,9 @@ function delay(seconds)
 end
 
 function loadPics()
-    local path = [[.\\Pics\\vQueDing3.bmp|.\\Pics\\vSellButton.bmp|.\\Pics\\vSellCount.bmp|.\\Pics\\vSellPrice.bmp|.\\Pics\\vSell1.bmp|.\\Pics\\vSell2.bmp|.\\Pics\\vBuy1.bmp|.\\Pics\\vBuy2.bmp|.\\Pics\\vStockID.bmp|.\\Pics\\vLast.bmp|.\\Pics\\vBuyPrice.bmp|.\\Pics\\vBuyCount.bmp|.\\Pics\\vBuyButton.bmp|.\\Pics\\vQueDing.bmp|.\\Pics\\vQueDing2.bmp]]
+    --local path = [[.\\Pics\\vQueDing3.bmp|.\\Pics\\vSellButton.bmp|.\\Pics\\vSellCount.bmp|.\\Pics\\vSellPrice.bmp|.\\Pics\\vSell1.bmp|.\\Pics\\vSell2.bmp|.\\Pics\\vBuy1.bmp|.\\Pics\\vBuy2.bmp|.\\Pics\\vStockID.bmp|.\\Pics\\vLast.bmp|.\\Pics\\vBuyPrice.bmp|.\\Pics\\vBuyCount.bmp|.\\Pics\\vBuyButton.bmp|.\\Pics\\vQueDing.bmp|.\\Pics\\vQueDing2.bmp]]
+    local path = [[.\\Pics\\vSell1.bmp|.\\Pics\\vSell2.bmp|.\\Pics\\vStockID.bmp|.\\Pics\\vSellPrice.bmp|.\\Pics\\vSellCount.bmp|.\\Pics\\vSellButton.bmp|.\\Pics\\vQueDing.bmp|.\\Pics\\vQueDing2.bmp]]
+    --dbgPrint('ddd')
     loadBmp(path)
     inputInit("");
 end
@@ -18,9 +20,9 @@ function dd()
   
   local flag = true;
   while flag do
-    local r = findDAPicA(0, 0, 0, 1920, 1024, "vSell1", 12);
-    local z = findDAPicA(0, 0, 0, 1920, 1024, "vSell2", 12);
-    
+    local r = findDAPicA(0, 0, 0, 1920, 1024, "vSell1", 62);
+    local z = findDAPicA(0, 0, 0, 1920, 1024, "vSell2", 62);
+    --dbgPrint("qxq")
     if r[1] >= 0 then
      --dbgPrint(r[1]);
       moveTo(r[1] + 15, r[2] + 12)
@@ -33,7 +35,7 @@ function dd()
     end
 
     --check
-    local q = findDAPicA(0, 0, 0, 1920, 1024, "vStockID", 12);
+    local q = findDAPicA(0, 0, 0, 1920, 1024, "vSellPrice", 12);
     if  q[1] >= 0 then
         flag = false
         --dbgPrint("find")
@@ -76,7 +78,7 @@ function ff()
       keyPress(8);
       delay(0.6)
       local t = para["StockPriceDoubleVal"]
-      dbgPrint(t)
+      --dbgPrint(t)
       sendString(t)
 
 
@@ -102,7 +104,7 @@ function gg()
       keyPress(8);
       delay(1)
       local t = para["StockCountIntVal"]
-      dbgPrint(t)
+      --dbgPrint(t)
       sendString(t)
 
 
@@ -125,7 +127,7 @@ function HH()
     end
 
       --check
-      local c = findDAPicA(0, 0, 0, 1920, 1024, "vStockID", 32);
+      local c = findDAPicA(0, 0, 0, 1920, 1024, "vQueDing2", 32);
       if c[1] >= 0 then
         flag = false
       end
@@ -133,18 +135,18 @@ function HH()
 end
 
 function II()
-  delay(0.5)
+  delay(0.1)
   local flag = true;
   while flag do
-    local r = findDAPicA(0, 0, 0, 1920, 1024, "vQueDing3", 32);
+    local r = findDAPicA(0, 0, 0, 1920, 1024, "vQueDing2", 32);
     if r[1] >= 0 then
       moveTo(r[1] + 22, r[2] + 22)
       lOnClick()
       delay(1)
     end
     --check
-    local c = findDAPicA(0, 0, 0, 1920, 1024, "vQueDing", 32);
-      if c[1] >= 0 then
+    local c = findDAPicA(0, 0, 0, 1920, 1024, "vQueDing2", 32);
+      if c[1] < 0 then
         flag = false
       end
   end
